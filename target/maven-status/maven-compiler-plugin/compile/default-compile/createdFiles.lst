@@ -1,8 +1,13 @@
+org\example\user\model\User$UserBuilder.class
+org\example\property\PropertyController.class
+org\example\controller\IndexController.class
+org\example\property\model\Property.class
+org\example\user\dto\UserMapper.class
 org\example\user\dto\UserDto.class
 org\example\user\UserController.class
 org\example\Main.class
-org\example\property\PropertyController.class
+org\example\user\UserService.class
 org\example\user\dto\UserDto$UserDtoBuilder.class
-org\example\controller\IndexController.class
 org\example\user\model\User.class
-org\example\property\model\Property.class
+org\example\user\UserServiceImpl.class
+org\example\user\UserRepository.class

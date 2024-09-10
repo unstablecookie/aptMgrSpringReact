@@ -3,5 +3,9 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\Main.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\model\Property.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserDto.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\model\User.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserController.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserRepository.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserService.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserServiceImpl.java

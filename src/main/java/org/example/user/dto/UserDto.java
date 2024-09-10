@@ -5,11 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
-    @NotBlank
-    String name;
+    private String name;
 }
