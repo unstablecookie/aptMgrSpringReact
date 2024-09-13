@@ -9,3 +9,6 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserRepository.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserService.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserServiceImpl.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\CustomRestExceptionHandler.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\EntityNotFoundException.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\ErrorResponse.java

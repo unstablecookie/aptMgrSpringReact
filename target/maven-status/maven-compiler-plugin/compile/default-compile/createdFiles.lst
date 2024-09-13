@@ -1,8 +1,11 @@
+org\example\util\CustomRestExceptionHandler.class
 org\example\user\model\User$UserBuilder.class
+org\example\util\error\ErrorResponse.class
 org\example\property\PropertyController.class
 org\example\controller\IndexController.class
 org\example\property\model\Property.class
 org\example\user\dto\UserMapper.class
+org\example\util\error\EntityNotFoundException.class
 org\example\user\dto\UserDto.class
 org\example\user\UserController.class
 org\example\Main.class
