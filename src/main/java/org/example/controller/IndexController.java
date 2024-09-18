@@ -13,8 +13,6 @@ public class IndexController {
         return mav;
     }
 
-
-
     @GetMapping("sad")
     public String fooSad() {
         return ":(";

@@ -1,7 +1,12 @@
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\controller\IndexController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\Main.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyDto.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\model\Property.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyController.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyRepository.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyService.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyServiceImpl.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\model\User.java

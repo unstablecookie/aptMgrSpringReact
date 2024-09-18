@@ -18,3 +18,7 @@ CREATE TABLE property (
     property_type_id bigint NOT NULL,
     FOREIGN KEY (property_type_id) REFERENCES property_types(id)
 );
+
+INSERT INTO property_types (type)
+VALUES ('HOUSE'),
+        ('APARTMENT');
