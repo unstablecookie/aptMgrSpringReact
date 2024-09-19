@@ -11,6 +11,7 @@ org\example\user\UserService.class
 org\example\property\dto\PropertyDto.class
 org\example\property\dto\PropertyMapper.class
 org\example\property\PropertyRepository.class
+org\example\SecurityConfig\ApplicationConfig.class
 org\example\user\model\User.class
 org\example\user\UserRepository.class
 org\example\property\model\Property$PropertyBuilder.class
