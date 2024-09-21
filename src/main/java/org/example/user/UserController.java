@@ -13,11 +13,6 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/test")
-    public String test() {
-        return "hello from controller";
-    }
-
     @GetMapping
     public List<UserDto> getUsers() {
         return userService.getUsers();

@@ -1,3 +1,4 @@
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\controller\AuthController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\controller\IndexController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\Main.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyDto.java
@@ -8,13 +9,19 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyRepository
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyService.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyServiceImpl.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\ApplicationConfig.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\JwtConstant.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\JwtProvider.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\JwtTokenValidator.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserDto.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserFormDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\dto\UserMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\model\User.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserRepository.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserService.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\user\UserServiceImpl.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\auth\ApiResponse.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\auth\AuthResponse.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\CustomRestExceptionHandler.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\EntityNotFoundException.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\ErrorResponse.java

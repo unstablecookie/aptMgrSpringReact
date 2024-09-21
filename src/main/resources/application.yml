@@ -16,6 +16,27 @@ spring:
     password: P@ssw0rd
   thymeleaf:
     prefix: file:./target/classes/static/
+  security:
+    filter:
+      chain:
+        content-negotiation:
+          parameter-strategy: ignore
+        any-request:
+          authorized: permitAll
+        request-matcher:
+          path:
+            pattern: "/api/**"
+            authenticated: true
+    csrf:
+      disabled: true
+    cors:
+      configurationSource:
+        allowedOrigins: http://localhost:8083
+        allowedMethods: "*"
+        allowedHeaders: "*"
+        exposedHeaders: Authorization
+        maxAge: 3600
+        
 management:
   endpoints:
     web:

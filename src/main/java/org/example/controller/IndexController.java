@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -7,14 +8,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
     
-    @GetMapping("")
+    @GetMapping(value = {"/","/signup"})
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("index");
         return mav;
     }
 
-    @GetMapping("sad")
-    public String fooSad() {
-        return ":(";
+//    @PreAuthorize("hasRole('111')")
+    @GetMapping("/dashboard")
+    public ModelAndView dashboard() {
+        ModelAndView mav = new ModelAndView("index");
+        return mav;
     }
 }
