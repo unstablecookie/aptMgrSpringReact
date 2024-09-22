@@ -23,11 +23,26 @@ public class UserMapper {
         if (updatedUser.getName() != null) user.setName(updatedUser.getName());
     }
 
-    public static User toUser(UserFormDto userFormDto, Role role, PasswordEncoder passwordEncoder) {
+    public static User toUser(UserFormRoleDto userFormRoleDto, Role role, PasswordEncoder passwordEncoder) {
         return User.builder()
-                .name(userFormDto.getName() != null ? userFormDto.getName() : null)
-                .password(userFormDto.getPassword() != null ? passwordEncoder.encode(userFormDto.getPassword()) : null)
+                .name(userFormRoleDto.getName() != null ? userFormRoleDto.getName() : null)
+                .password(userFormRoleDto.getPassword() != null ? passwordEncoder.encode(userFormRoleDto.getPassword()) : null)
                 .roles(List.of(role))
+                .build();
+    }
+
+    public static User toUser(UserAuthDto userAuthDto, Role role, PasswordEncoder passwordEncoder) {
+        return User.builder()
+                .name(userAuthDto.getName() != null ? userAuthDto.getName() : null)
+                .password(userAuthDto.getPassword() != null ? passwordEncoder.encode(userAuthDto.getPassword()) : null)
+                .roles(List.of(role))
+                .build();
+    }
+
+    public static User toUser(UserAuthDto userAuthDto, PasswordEncoder passwordEncoder) {
+        return User.builder()
+                .name(userAuthDto.getName())
+                .password(passwordEncoder.encode(userAuthDto.getPassword()))
                 .build();
     }
 }

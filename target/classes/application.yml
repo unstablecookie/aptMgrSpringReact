@@ -17,25 +17,9 @@ spring:
   thymeleaf:
     prefix: file:./target/classes/static/
   security:
-    filter:
-      chain:
-        content-negotiation:
-          parameter-strategy: ignore
-        any-request:
-          authorized: permitAll
-        request-matcher:
-          path:
-            pattern: "/api/**"
-            authenticated: true
-    csrf:
-      disabled: true
-    cors:
-      configurationSource:
-        allowedOrigins: http://localhost:8083
-        allowedMethods: "*"
-        allowedHeaders: "*"
-        exposedHeaders: Authorization
-        maxAge: 3600
+    jwt:
+      secret-key: "d293df73b776119b4b78c6de9497925bd3697ef2b5a914e8c6fd8f3f4d13e327"
+      expiration-time: 3600000
         
 management:
   endpoints:

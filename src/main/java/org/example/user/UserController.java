@@ -1,7 +1,9 @@
 package org.example.user;
 
 import lombok.RequiredArgsConstructor;
+import org.example.user.dto.RoleDto;
 import org.example.user.dto.UserDto;
+import org.example.user.dto.UserFormRoleDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +27,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDto addUser(@RequestBody UserDto userDto) {
-        return userService.addUser(userDto);
+    public UserDto addUser(@RequestBody UserFormRoleDto userFormRoleDto) {
+        return userService.addUser(userFormRoleDto);
     }
 
     @PatchMapping("/{userId}")
@@ -39,5 +41,11 @@ public class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
+    }
+
+    @GetMapping("/roles")
+    @ResponseStatus(HttpStatus.OK)
+    public List<RoleDto> getRoles() {
+        return userService.getRoles();
     }
 }

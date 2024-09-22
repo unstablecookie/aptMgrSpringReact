@@ -1,22 +1,13 @@
 package org.example.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class IndexController {
-    
-    @GetMapping(value = {"/","/signup"})
+    @GetMapping(value = {"/","/signup","/dashboard"})
     public ModelAndView index() {
-        ModelAndView mav = new ModelAndView("index");
-        return mav;
-    }
-
-//    @PreAuthorize("hasRole('111')")
-    @GetMapping("/dashboard")
-    public ModelAndView dashboard() {
         ModelAndView mav = new ModelAndView("index");
         return mav;
     }

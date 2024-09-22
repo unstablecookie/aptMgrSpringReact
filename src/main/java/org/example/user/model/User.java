@@ -41,7 +41,6 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());//"ROLE_" + 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         for(Role r : roles) {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + r.getName().toString()));
@@ -53,11 +52,4 @@ public class User implements UserDetails {
     public String getUsername() {
         return name;
     }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.getName().toString());
-//
-//        return List.of(authority);
-//    }
 }
