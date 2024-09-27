@@ -1,0 +1,39 @@
+.bord-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bord {
+    
+    display: inline-block;
+    padding: 8px;
+    border: 3px solid #1d5d68;
+    border-radius: 6px;
+    box-shadow: 
+        0 2px 1px rgba(0, 0, 0, 0.2), 
+        inset 0 2px 1px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #222;
+    background: #ddd url(../styles/images/bg2.jpg) repeat top left;
+    text-align: center;
+}
+  
+.bord:hover {
+    border-color: #26fcd8;
+}
+  
+.bord:active {
+    border-color: #26fcd8;
+}
+  
+.divborder {
+    padding: 7px;
+}
+  
+.divloginatcenter {
+    margin: auto;
+    width: 30%;
+}

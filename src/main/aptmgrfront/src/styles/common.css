@@ -1,0 +1,10 @@
+body {
+    background-color: #282c34;
+    background: #ddd url(./images/bg.jpg) repeat top left;
+}
+
+* {
+    color: #333;
+    font-family: "Lato", Calibri, Arial, sans-serif;
+    font-weight: 700;
+}

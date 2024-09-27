@@ -1,0 +1,36 @@
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-error {
+    display: inline-block;
+    padding: 8px;
+    border: 3px solid #fc2626;
+    border-radius: 6px;
+    box-shadow: 
+        0 2px 1px rgba(0, 0, 0, 0.2), 
+        inset 0 2px 1px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-size: 14px;
+    /* text-transform: uppercase; */
+    color: #222;
+    width: 30em;
+    text-align: center;
+}
+  
+.form-error:hover {
+    border-color: #fd8b8b
+}
+  
+.form-error:active {
+    border-color: #febdbd
+}
+
+.error-container-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}

@@ -1,0 +1,31 @@
+.form {
+  display: inline-block;
+  padding: 8px;
+  border: 3px solid #FCB326;
+  border-radius: 6px;
+  box-shadow: 
+      0 2px 1px rgba(0, 0, 0, 0.2), 
+      inset 0 2px 1px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #222;
+  background: #ddd url(../styles/images/bg2.jpg) repeat top left;
+}
+
+.form:hover {
+  border-color: #FDD68B
+}
+
+.form:active {
+  border-color: #FEE8BD
+}
+
+.divborder {
+  padding: 8px;
+}
+
+.divloginatcenter {
+  margin: auto;
+  width: 30%;
+}
