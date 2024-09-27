@@ -1,6 +1,7 @@
 package org.example.property.dto;
 
 import org.example.property.model.Property;
+import org.example.user.model.User;
 
 public class PropertyMapper {
 
@@ -8,6 +9,7 @@ public class PropertyMapper {
         return PropertyDto.builder()
                 .title(property.getTitle() != null ? property.getTitle() : null)
                 .propertyTypeId(property.getPropertyTypeId() != null ? property.getPropertyTypeId() : null)
+                .ownerId(property.getUser().getId() != null ? property.getUser().getId() : null)
                 .build();
     }
 
@@ -15,6 +17,14 @@ public class PropertyMapper {
         return Property.builder()
                 .title(propertyDto.getTitle() != null ? propertyDto.getTitle() : null)
                 .propertyTypeId(propertyDto.getPropertyTypeId() != null ? propertyDto.getPropertyTypeId() : null)
+                .build();
+    }
+
+    public static Property toPropertyWithUser(PropertyDto propertyDto, User user) {
+        return Property.builder()
+                .title(propertyDto.getTitle() != null ? propertyDto.getTitle() : null)
+                .propertyTypeId(propertyDto.getPropertyTypeId() != null ? propertyDto.getPropertyTypeId() : null)
+                .user(user)
                 .build();
     }
 

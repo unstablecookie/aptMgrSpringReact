@@ -33,6 +33,13 @@ public class PropertyController {
         return propertyService.addProperty(propertyDto);
     }
 
+    @PostMapping("/owner")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PropertyDto addPropertyByOwner(@RequestBody PropertyDto propertyDto,
+                                          @RequestHeader("authorization") String token) {
+        return propertyService.addPropertyByOwner(propertyDto, token);
+    }
+
     @PatchMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
     public PropertyDto updateProperty(@PathVariable Long propertyId, @RequestBody PropertyDto propertyDto) {
@@ -49,5 +56,12 @@ public class PropertyController {
     @ResponseStatus(HttpStatus.OK)
     public List<PropertyTypeDto> getTypes() {
         return propertyService.getPropertyTypes();
+    }
+
+    @GetMapping(value = "/owner")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PropertyDto> getOwnerProperties(@RequestHeader("authorization") String token) {
+        System.out.println("bearer:" + token);
+        return propertyService.getOwnerProperties(token);
     }
 }

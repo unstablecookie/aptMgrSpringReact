@@ -2,6 +2,7 @@ package org.example.user;
 
 import lombok.AllArgsConstructor;
 import org.example.user.model.Role;
+import org.example.user.model.RoleEnum;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
 import org.springframework.context.ApplicationListener;
@@ -20,7 +21,14 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        this.seedRoles();
         this.seedAdmin();
+    }
+
+    private void seedRoles() {
+        for (RoleEnum re : RoleEnum.values()) {
+            roleRepository.save(Role.builder().name(re).build());
+        }
     }
 
     private void seedAdmin() {

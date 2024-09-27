@@ -1,13 +1,16 @@
 package org.example.property;
 
 import lombok.RequiredArgsConstructor;
+import org.example.SecurityConfig.JwtService;
 import org.example.property.dto.PropertyDto;
 import org.example.property.dto.PropertyMapper;
 import org.example.property.dto.PropertyTypeDto;
 import org.example.property.dto.PropertyTypeMapper;
 import org.example.property.model.Property;
 import org.example.property.model.PropertyType;
+import org.example.user.UserRepository;
 import org.example.user.dto.UserMapper;
+import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -18,7 +21,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService {
     private final PropertyRepository propertyRepository;
+    private final UserRepository userRepository;
     private final PropertyTypeRepository propertyTypeRepository;
+    private final JwtService jwtService;
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
@@ -41,6 +46,14 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public PropertyDto addProperty(PropertyDto propertyDto) {
         Property property = PropertyMapper.toProperty(propertyDto);
+        return PropertyMapper.toPropertyDto(propertyRepository.save(property));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Override
+    public PropertyDto addPropertyByOwner(PropertyDto propertyDto, String token) {
+        User user = getUserFromToken(token);
+        Property property = PropertyMapper.toPropertyWithUser(propertyDto, user);
         return PropertyMapper.toPropertyDto(propertyRepository.save(property));
     }
 
@@ -69,5 +82,21 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyTypeRepository.findAll().stream()
                 .map(x -> PropertyTypeMapper.toPropertyTypeDto(x))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PropertyDto> getOwnerProperties(String token) {
+        User user = getUserFromToken(token);
+        return propertyRepository.findByUserId(user.getId()).stream()
+                .map(x -> PropertyMapper.toPropertyDto(x))
+                .collect(Collectors.toList());
+    }
+
+    private User getUserFromToken(String token) {
+        String jwt = token.substring(7);
+        String userName = jwtService.extractUsername(jwt);
+        return userRepository.findByName(userName).orElseThrow(
+                () -> new EntityNotFoundException(String.format("User with name=%s was not found", userName),
+                        "The required object was not found."));
     }
 }

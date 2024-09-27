@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -37,7 +38,6 @@ public class AuthenticationService {
     public User authenticate(UserAuthDto userAuthDto) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userAuthDto.getName(),
                 userAuthDto.getPassword()));
-
         return userRepository.findByName(userAuthDto.getName())
                 .orElseThrow();
     }

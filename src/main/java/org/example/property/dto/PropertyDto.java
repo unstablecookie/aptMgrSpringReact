@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class PropertyDto {
     private String title;
     private Long propertyTypeId;
+    private Long ownerId;
 }

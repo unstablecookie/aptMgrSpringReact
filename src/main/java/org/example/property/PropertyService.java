@@ -18,4 +18,8 @@ public interface PropertyService {
     void deleteProperty(Long propertyId);
 
     List<PropertyTypeDto> getPropertyTypes();
+
+    List<PropertyDto> getOwnerProperties(String token);
+
+    PropertyDto addPropertyByOwner(PropertyDto propertyDto, String token);
 }
