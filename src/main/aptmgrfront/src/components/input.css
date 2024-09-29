@@ -1,0 +1,43 @@
+.line {
+    display: block;
+    border: none;
+    color: #333;
+    background: transparent;
+    border-bottom: 1px dotted black;
+    padding: 5px 2px 0 2px;
+  }
+  
+  .line:focus { 
+    outline: none;
+    border-color: #51CBEE;
+  }
+
+.depth {
+    display: block;
+    border: 1px solid silver;
+    background: linear-gradient(#eee, #fff);
+    transition: all 0.3s ease-out;
+    padding: 5px;
+    color: #555;
+  }
+  
+  .depth:focus {
+    outline: none;
+    background-position: 0 -1.7em;
+  }
+
+  .simple-input {
+    display: block;
+    padding: 5px;
+    border: 2px solid #c4f120;
+    border-radius: 5px;
+    color: #333;
+    transition: all 0.3s ease-out;
+  }
+  
+  .simple-input:hover { border-radius: 8px; }
+  .simple-input:focus { 
+    outline: none;
+    border-radius: 8px; 
+    border-color: #d3eb92;
+  }

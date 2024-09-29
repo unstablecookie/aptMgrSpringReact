@@ -31,7 +31,6 @@ public class AuthenticationService {
                         "The required object was not found."));
         User user = UserMapper.toUser(userAuthDto, passwordEncoder);
         user.setRoles(List.of(role));
-        System.out.println("user.getAuthorities():" + user.getAuthorities());
         return UserMapper.toUserDto(userRepository.save(user));
     }
 

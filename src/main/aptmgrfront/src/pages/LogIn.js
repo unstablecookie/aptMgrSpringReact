@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../components/Border.css';
+import '../components/input.css';
 import '../components/menu/buttons-small.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,10 +38,10 @@ const LogIn = props => {
                         <h2>Please login</h2>
                     </div>
                     <div className="divborder">
-                        <input placeholder='Name' id='email' value={name} type='name' onChange={(e) => setName(e.target.value)} />
+                        <input className='line' placeholder='Name' id='email' value={name} type='name' onChange={(e) => setName(e.target.value)} />
                     </div>
                     <div className="divborder">
-                        <input placeholder='Password' id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <input className='line' placeholder='Password' id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="divborder">
                         {error && <p className="text-danger">{error}</p>}

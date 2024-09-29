@@ -70,13 +70,13 @@ const NewUser = props => {
                 </div>
                 <div>
                     <div className="divborder">
-                        <input placeholder="Enter your username" name="name" onChange={(e) => handleChange(e)} value={user.name} />
+                        <input className='simple-input' placeholder="Enter your username" name="name" onChange={(e) => handleChange(e)} value={user.name} />
                     </div>
                     <div className="divborder">
-                        <input placeholder="Enter your password" name="password" onChange={(e) => handleChange(e)} value={user.password} />
+                        <input className='simple-input' placeholder="Enter your password" name="password" onChange={(e) => handleChange(e)} value={user.password} />
                     </div>
                     <div className="divborder">
-                        <select name="roleId" onChange={(e) => handleChange(e)} value={user.roleId}>
+                        <select className='simple-input' name="roleId" onChange={(e) => handleChange(e)} value={user.roleId}>
                             {
                             getRoles.map((role,i) =>
                                 <option key={i} value={role.id}>{role.name}</option>

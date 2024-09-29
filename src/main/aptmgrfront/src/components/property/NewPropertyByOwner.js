@@ -68,10 +68,10 @@ const NewPropertyByOwner = props => {
                 </div>
                 <div>
                     <div className="divborder">
-                        <input placeholder="enter property title" name="title" onChange={(e) => handleChange(e)} value={property.title} />
+                        <input className='simple-input' placeholder="enter property title" name="title" onChange={(e) => handleChange(e)} value={property.title} />
                     </div>
                     <div className="divborder">
-                        <select name="propertyTypeId" onChange={(e) => handleChange(e)} value={property.propertyTypeId}>
+                        <select className='simple-input' name="propertyTypeId" onChange={(e) => handleChange(e)} value={property.propertyTypeId}>
                             {
                             getTypes.map((type,i) =>
                                 <option key={i} value={type.id}>{type.type}</option>

@@ -45,13 +45,13 @@ const SignUp = props => {
                             {error && <p className="text-danger">{error}</p>}
                         </div>
                         <div className="divborder">
-                            <input id='name' placeholder={"Name"} value={name} type='text' onChange={(e) => setName(e.target.value)} />
+                            <input className='depth' id='name' placeholder={"Name"} value={name} type='text' onChange={(e) => setName(e.target.value)} />
                         </div>
                         <div className="divborder">
-                            <input placeholder='Password' id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input className='depth' placeholder='Password' id='password' type='password' value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                         <div className="divborder">
-                            <input placeholder='Confirm Password' id='confirmPassword' type='password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                            <input className='depth' placeholder='Confirm Password' id='confirmPassword' type='password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                         </div>
                         <div className="divborder">
                             <button class="modern-small embossed-link-small" onClick={handleSignup}>Sign Up</button>
