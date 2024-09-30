@@ -16,6 +16,7 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyTypeReposi
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\TypeSeeder.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\ApplicationConfiguration.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\AuthenticationService.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\AuthenticationServiceImpl.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\JwtAuthenticationFilter.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\JwtService.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\SecurityConfig\SecurityConfiguration.java

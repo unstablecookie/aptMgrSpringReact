@@ -36,6 +36,7 @@ org\example\controller\IndexController.class
 org\example\user\dto\RoleDto$RoleDtoBuilder.class
 org\example\user\dto\RoleDto.class
 org\example\util\error\EntityNotFoundException.class
+org\example\SecurityConfig\AuthenticationServiceImpl.class
 org\example\user\dto\UserDto.class
 org\example\controller\CustomErrorController.class
 org\example\property\dto\PropertyTypeMapper.class
