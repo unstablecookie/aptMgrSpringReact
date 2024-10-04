@@ -2,11 +2,13 @@ package org.example.property;
 
 import lombok.RequiredArgsConstructor;
 import org.example.property.dto.PropertyDto;
+import org.example.property.dto.PropertyImageDto;
 import org.example.property.dto.PropertyTypeDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,15 +21,15 @@ public class PropertyController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<PropertyDto> getProperties() {
+    public List<PropertyImageDto> getProperties() {
         logger.info("get properties");
-        return propertyService.getProperties();
+        return propertyService.getPropertiesWithImages();
     }
 
     @GetMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
     public PropertyDto getProperty(@PathVariable Long propertyId) {
-        logger.info("get properties");
+        logger.info("get property");
         return propertyService.getProperty(propertyId);
     }
 
@@ -68,8 +70,17 @@ public class PropertyController {
 
     @GetMapping(value = "/owner")
     @ResponseStatus(HttpStatus.OK)
-    public List<PropertyDto> getOwnerProperties(@RequestHeader("authorization") String token) {
+    public List<PropertyImageDto> getOwnerProperties(@RequestHeader("authorization") String token) {
         logger.info("get properties by owner");
-        return propertyService.getOwnerProperties(token);
+        return propertyService.getOwnerPropertiesWithImages(token);
+    }
+
+    @PostMapping("/image")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPropertyImage(@RequestParam("imageFile") MultipartFile multipartFile,
+                                 @RequestHeader("X-property-id") Long propertyId,
+                                          @RequestHeader("authorization") String token) {
+        logger.info(String.format("add property image"));
+        propertyService.addPropertyImage(multipartFile, propertyId, token);
     }
 }

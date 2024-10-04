@@ -1,12 +1,11 @@
 package org.example.property;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.RequiredArgsConstructor;
 import org.example.SecurityConfig.JwtService;
-import org.example.property.dto.PropertyDto;
-import org.example.property.dto.PropertyMapper;
-import org.example.property.dto.PropertyTypeDto;
-import org.example.property.dto.PropertyTypeMapper;
+import org.example.property.dto.*;
 import org.example.property.model.Property;
+import org.example.property.model.PropertyImage;
 import org.example.property.model.PropertyType;
 import org.example.user.UserRepository;
 import org.example.user.dto.UserMapper;
@@ -14,6 +13,9 @@ import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +25,11 @@ public class PropertyServiceImpl implements PropertyService {
     private final PropertyRepository propertyRepository;
     private final UserRepository userRepository;
     private final PropertyTypeRepository propertyTypeRepository;
+
+    private final PropertyImageRepository propertyImageRepository;
     private final JwtService jwtService;
 
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<PropertyDto> getProperties() {
         return propertyRepository.findAll().stream()
@@ -84,6 +88,7 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public List<PropertyDto> getOwnerProperties(String token) {
         User user = getUserFromToken(token);
@@ -92,11 +97,58 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Override
+    public List<PropertyImageDto> getOwnerPropertiesWithImages(String token) {
+        User user = getUserFromToken(token);
+        List<PropertyImageDto> properties = propertyRepository.findByUserId(user.getId()).stream()
+                .map(x -> PropertyMapper.toPropertyImageDto(x))
+                .collect(Collectors.toList());
+        updatePropertyDtoWithImages(properties);
+        return properties;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Override
+    public void addPropertyImage(MultipartFile multipartFile, Long propertyId, String token) {
+        Property property = propertyRepository.findById(propertyId).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
+                        "The required object was not found."));
+        try {
+            PropertyImage image = PropertyImage.builder()
+                    .data(multipartFile.getBytes())
+                    .property(property)
+                    .build();
+            propertyImageRepository.save(image);
+        } catch (IOException e) {
+            e.printStackTrace();//TODO
+        }
+    }
+
     private User getUserFromToken(String token) {
         String jwt = token.substring(7);
         String userName = jwtService.extractUsername(jwt);
         return userRepository.findByName(userName).orElseThrow(
                 () -> new EntityNotFoundException(String.format("User with name=%s was not found", userName),
                         "The required object was not found."));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Override
+    public List<PropertyImageDto> getPropertiesWithImages() {
+        List<PropertyImageDto> properties = propertyRepository.findAll().stream()
+                .map(x -> PropertyMapper.toPropertyImageDto(x))
+                .collect(Collectors.toList());
+        updatePropertyDtoWithImages(properties);
+        return properties;
+    }
+
+    private void updatePropertyDtoWithImages(List<PropertyImageDto> properties) {
+        properties.stream().forEach(x -> {
+            PropertyImage propertyImage = propertyImageRepository.findByPropertyId(x.getId());
+            if (propertyImage != null) {
+                x.setData(propertyImage.getData());
+            }
+        });
     }
 }

@@ -7,6 +7,16 @@ public class PropertyMapper {
 
     public static PropertyDto toPropertyDto(Property property) {
         return PropertyDto.builder()
+                .id(property.getId() != null ? property.getId() : null)
+                .title(property.getTitle() != null ? property.getTitle() : null)
+                .propertyTypeId(property.getPropertyTypeId() != null ? property.getPropertyTypeId() : null)
+                .ownerId(property.getUser().getId() != null ? property.getUser().getId() : null)
+                .build();
+    }
+
+    public static PropertyImageDto toPropertyImageDto(Property property) {
+        return PropertyImageDto.builder()
+                .id(property.getId() != null ? property.getId() : null)
                 .title(property.getTitle() != null ? property.getTitle() : null)
                 .propertyTypeId(property.getPropertyTypeId() != null ? property.getPropertyTypeId() : null)
                 .ownerId(property.getUser().getId() != null ? property.getUser().getId() : null)

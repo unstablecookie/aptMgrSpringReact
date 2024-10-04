@@ -25,6 +25,7 @@ org\example\util\CustomRestExceptionHandler.class
 org\example\user\model\Role.class
 org\example\property\dto\PropertyDto$PropertyDtoBuilder.class
 org\example\user\dto\UserMapper.class
+org\example\property\model\PropertyImage.class
 org\example\util\auth\LoginResponse$LoginResponseBuilder.class
 org\example\user\dto\RoleMapper.class
 org\example\SecurityConfig\AuthenticationService.class
@@ -39,14 +40,18 @@ org\example\util\error\EntityNotFoundException.class
 org\example\SecurityConfig\AuthenticationServiceImpl.class
 org\example\user\dto\UserDto.class
 org\example\controller\CustomErrorController.class
+org\example\property\dto\PropertyImageDto$PropertyImageDtoBuilder.class
+org\example\property\dto\PropertyImageDto.class
 org\example\property\dto\PropertyTypeMapper.class
 org\example\user\RoleRepository.class
 org\example\user\model\User.class
 org\example\user\model\Role$RoleBuilder.class
 org\example\util\auth\LoginResponse.class
+org\example\property\model\PropertyImage$PropertyImageBuilder.class
 org\example\util\error\ErrorResponse.class
 org\example\controller\AuthController.class
 org\example\SecurityConfig\JwtAuthenticationFilter.class
 org\example\SecurityConfig\ApplicationConfiguration.class
+org\example\property\PropertyImageRepository.class
 org\example\user\AdminSeeder.class
 org\example\property\PropertyService.class

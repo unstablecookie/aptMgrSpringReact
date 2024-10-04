@@ -10,6 +10,7 @@ import LoadUsers from '../components/user/LoadUsers';
 import LoadProperties from '../components/property/LoadProperties';
 import ListPropertiesButton from '../components/menu/ListPropertiesButton';
 import TopRibbon from '../components/menu/TopRibbon';
+import UploadImage from '../components/property/UploadImage';
 
 const DashboardAdmin = props => {
 

@@ -12,7 +12,8 @@ import {
     HeaderCell,
     Cell,
   } from "@table-library/react-table-library/table";
-  
+import '../../styles/imageStyles.css'
+import HomeIcon from '../../styles/images/home_icon.png';
 
 const LoadOwnerProperties = props => {
     const chakraTheme = getTheme(DEFAULT_OPTIONS);
@@ -38,6 +39,14 @@ const LoadOwnerProperties = props => {
         fetchProperties();
     }, []);
 
+    const getImagePath = (e) => {
+      if(e === null) {
+        return {HomeIcon}.HomeIcon;
+      } else {
+        return `data:image/jpeg;base64,${e}`;
+      }
+    };
+
     if (!getProperties.nodes.length) return <h3>loading..</h3>;
 
     return (
@@ -50,6 +59,7 @@ const LoadOwnerProperties = props => {
                 <HeaderCell>id</HeaderCell>
                 <HeaderCell>title</HeaderCell>
                 <HeaderCell>type</HeaderCell>
+                <HeaderCell>image</HeaderCell>
               </HeaderRow>
             </Header>
             <Body>
@@ -58,6 +68,12 @@ const LoadOwnerProperties = props => {
                   <Cell>{i}</Cell>
                   <Cell>{property.title}</Cell>
                   <Cell>{property.propertyTypeId}</Cell>
+                  <Cell>
+                    <img className="thumbnail"
+                      src={getImagePath(property.data)}
+                      alt=""
+                    />
+                  </Cell>
                 </Row>
               ))}
             </Body>

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PropertyDto {
+    private Long id;
     private String title;
     private Long propertyTypeId;
     private Long ownerId;

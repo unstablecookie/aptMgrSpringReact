@@ -3,9 +3,11 @@ import axios from "axios";
 import '../NewForm.css'
 import '../menu/buttons-small.css';
 import PostService from '../PostService';
+import PostImageService from '../PostImageService';
 
 const NewPropertyByOwner = props => {
     const API_URL = "/properties/owner";
+    const API_IMG_URL = "/properties/image";
     const [property, setProperty] = useState({
         title: "",
         propertyTypeId: 1,
@@ -15,6 +17,7 @@ const NewPropertyByOwner = props => {
         headers: { Authorization: `Bearer ${props.token}` }
     };
     const [getTypes, setGetTypes] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
     const handleChange = (e) => {
         const value = e.target.value;
         setProperty({ ...property, [e.target.name]: value })
@@ -32,11 +35,33 @@ const NewPropertyByOwner = props => {
                     propertyTypeId: 1,
                 })
                 updateButton();
-            }).catch((error) => {
+                console.log(res.data.id);
+                UploadSelectedImage(res.data.id);
+            })
+            .catch((error) => {
                 console.log(error);
                 updateButton();
             });
     }
+
+    const UploadSelectedImage = (e) => {
+        if (selectedImage === null) {
+            return;
+        }
+        const config_img = {
+            headers: { Authorization:
+                `Bearer ${props.token}`,
+                'Content-Type': 'multipart/form-data',
+                'X-property-id': e}
+        };
+        PostImageService.saveEntity(API_IMG_URL, selectedImage, config_img)
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+        });
+    };
 
     const updateButton = () => {
         props.hide(false);
@@ -77,6 +102,9 @@ const NewPropertyByOwner = props => {
                                 <option key={i} value={type.id}>{type.type}</option>
                             )};
                         </select>
+                    </div>
+                    <div className="divborder">
+                        <input className='simple-input' type="file" name="myImage" onChange={(event) => {setSelectedImage(event.target.files[0]);}}/>
                     </div>
                     <button class="modern-small embossed-link-small" type="submit">Submit</button>
                 </div>

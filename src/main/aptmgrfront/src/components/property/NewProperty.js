@@ -3,13 +3,13 @@ import axios from "axios";
 import '../NewForm.css'
 import '../menu/buttons-small.css';
 import PostService from '../PostService';
-const API_URL = "/properties";
 
 const NewProperty = props => {
+    const API_URL = "/properties";
     const [property, setProperty] = useState({
         title: "",
         propertyTypeId: 1,
-    });  
+    });
     const [msg, setMsg] = useState("");
     const config = {
         headers: { Authorization: `Bearer ${props.token}` }
@@ -21,8 +21,7 @@ const NewProperty = props => {
     }
 
     const RegisterProperty = (e) => {
-        e.preventDefault();
-        console.log(property);  
+        e.preventDefault(); 
         PostService.saveEntity(API_URL, property, config)
             .then((res) => {
                 console.log("Property Added Successfully");

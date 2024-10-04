@@ -3,12 +3,15 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\controller\CustomErrorContr
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\controller\IndexController.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\Main.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyDto.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyImageDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyTypeDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyTypeMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\model\Property.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\model\PropertyImage.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\model\PropertyType.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyController.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyImageRepository.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyRepository.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyService.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\PropertyServiceImpl.java
