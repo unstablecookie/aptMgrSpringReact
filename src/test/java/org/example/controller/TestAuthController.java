@@ -1,9 +1,8 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.SecurityConfig.AuthenticationService;
-import org.example.SecurityConfig.AuthenticationServiceImpl;
-import org.example.SecurityConfig.JwtService;
+import org.example.security.AuthenticationService;
+import org.example.security.JwtService;
 import org.example.user.dto.UserAuthDto;
 import org.example.user.dto.UserDto;
 import org.example.user.model.Role;
@@ -26,7 +25,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
-//import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
