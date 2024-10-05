@@ -1,14 +1,11 @@
 package org.example.property;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import lombok.RequiredArgsConstructor;
-import org.example.SecurityConfig.JwtService;
+import org.example.security.JwtService;
 import org.example.property.dto.*;
 import org.example.property.model.Property;
 import org.example.property.model.PropertyImage;
-import org.example.property.model.PropertyType;
 import org.example.user.UserRepository;
-import org.example.user.dto.UserMapper;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
 import org.springframework.security.access.prepost.PreAuthorize;

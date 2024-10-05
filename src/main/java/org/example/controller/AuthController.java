@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.SecurityConfig.AuthenticationService;
+import org.example.security.AuthenticationService;
 import org.example.user.dto.*;
 import org.example.util.auth.LoginResponse;
 import org.springframework.http.HttpStatus;

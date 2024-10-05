@@ -1,2 +1,3 @@
 org\example\user\TestUserController.class
+org\example\user\TestUserServiceRoles.class
 org\example\controller\TestAuthController.class
