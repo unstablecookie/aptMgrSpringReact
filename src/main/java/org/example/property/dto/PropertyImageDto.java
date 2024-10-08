@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PropertyImageDto {
     private Long id;
     private String title;
-    private Long propertyTypeId;
+    private String propertyType;
     private Long ownerId;
     private byte[] data;
 }

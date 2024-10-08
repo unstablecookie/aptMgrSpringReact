@@ -1,0 +1,35 @@
+.popupc {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.1s;
+
+}
+
+.popupc.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popupc_content {
+    padding: 11px;
+    border-radius: 9px;
+    background-color: rgb(219, 219, 216);
+    width: 600px;
+    transform: scale(0.8);
+    transition: 0.1s all;
+    background: #ddd url(../styles/images/bg.jpg) repeat top left;
+}
+
+.popupc_content.active {
+    transform: scale(1);
+}
+

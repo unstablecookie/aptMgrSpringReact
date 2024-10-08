@@ -3,6 +3,7 @@ package org.example.property;
 import lombok.RequiredArgsConstructor;
 import org.example.property.dto.PropertyDto;
 import org.example.property.dto.PropertyImageDto;
+import org.example.property.dto.PropertySaveDto;
 import org.example.property.dto.PropertyTypeDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,31 +29,40 @@ public class PropertyController {
 
     @GetMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
-    public PropertyDto getProperty(@PathVariable Long propertyId) {
+    public PropertyImageDto getProperty(@PathVariable Long propertyId,
+                                        @RequestHeader("authorization") String token) {
         logger.info("get property");
-        return propertyService.getProperty(propertyId);
+        return propertyService.getProperty(propertyId, token);
+    }
+
+    @GetMapping("/owner/{propertyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PropertyImageDto getPropertyByOwner(@PathVariable Long propertyId,
+                                        @RequestHeader("authorization") String token) {
+        logger.info("get property");
+        return propertyService.getPropertyByOwner(propertyId, token);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PropertyDto addProperty(@RequestBody PropertyDto propertyDto) {
-        logger.info(String.format("add property with title %s", propertyDto.getTitle()));
-        return propertyService.addProperty(propertyDto);
+    public PropertyDto addProperty(@RequestBody PropertySaveDto propertySaveDto) {
+        logger.info(String.format("add property with title %s", propertySaveDto.getTitle()));
+        return propertyService.addProperty(propertySaveDto);
     }
 
     @PostMapping("/owner")
     @ResponseStatus(HttpStatus.CREATED)
-    public PropertyDto addPropertyByOwner(@RequestBody PropertyDto propertyDto,
+    public PropertyDto addPropertyByOwner(@RequestBody PropertySaveDto propertySaveDto,
                                           @RequestHeader("authorization") String token) {
-        logger.info(String.format("add property by owner with title %s", propertyDto.getTitle()));
-        return propertyService.addPropertyByOwner(propertyDto, token);
+        logger.info(String.format("add property by owner with title %s", propertySaveDto.getTitle()));
+        return propertyService.addPropertyByOwner(propertySaveDto, token);
     }
 
     @PatchMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
-    public PropertyDto updateProperty(@PathVariable Long propertyId, @RequestBody PropertyDto propertyDto) {
+    public PropertyDto updateProperty(@PathVariable Long propertyId, @RequestBody PropertySaveDto propertySaveDto) {
         logger.info(String.format("update property with id=%d", propertyId));
-        return propertyService.updateProperty(propertyId, propertyDto);
+        return propertyService.updateProperty(propertyId, propertySaveDto);
     }
 
     @DeleteMapping("/{propertyId}")

@@ -22,8 +22,9 @@ public class Property {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "property_type_id")
-    private Long propertyTypeId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "property_type_id")
+    private PropertyType propertyType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")

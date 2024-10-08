@@ -16,6 +16,7 @@ org\example\security\AuthenticationServiceImpl.class
 org\example\property\dto\PropertyDto.class
 org\example\user\dto\UserFormRoleDto$UserFormRoleDtoBuilder.class
 org\example\property\dto\PropertyMapper.class
+org\example\property\dto\PropertySaveDto$PropertySaveDtoBuilder.class
 org\example\property\PropertyRepository.class
 org\example\user\UserRepository.class
 org\example\property\TypeSeeder.class
@@ -24,6 +25,7 @@ org\example\property\model\PropertyType$PropertyTypeBuilder.class
 org\example\util\CustomRestExceptionHandler.class
 org\example\user\model\Role.class
 org\example\property\dto\PropertyDto$PropertyDtoBuilder.class
+org\example\property\dto\PropertySaveDto.class
 org\example\user\dto\UserMapper.class
 org\example\property\model\PropertyImage.class
 org\example\util\auth\LoginResponse$LoginResponseBuilder.class

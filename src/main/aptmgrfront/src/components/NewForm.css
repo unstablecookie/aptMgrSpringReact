@@ -14,11 +14,11 @@
 }
 
 .form:hover {
-  border-color: #FDD68B
+  border-color: #FDD68B;
 }
 
 .form:active {
-  border-color: #FEE8BD
+  border-color: #FEE8BD;
 }
 
 .divborder {
