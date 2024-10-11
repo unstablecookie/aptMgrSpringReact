@@ -2,6 +2,7 @@ package org.example.util;
 
 import org.example.util.error.EntityNotFoundException;
 import org.example.util.error.ErrorResponse;
+import org.example.util.error.PermissionViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,11 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<ErrorResponse> handleTemplateInputException(TemplateInputException ex) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         return new ResponseEntity<>(new ErrorResponse(status, ex.getMessage(), "wrong url path"), status);
+    }
+
+    @ExceptionHandler(PermissionViolationException.class)
+    protected ResponseEntity<ErrorResponse> handlePermissionViolationException(PermissionViolationException ex) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        return new ResponseEntity<>(new ErrorResponse(status, ex.getMessage(), ex.getReason()), status);
     }
 }

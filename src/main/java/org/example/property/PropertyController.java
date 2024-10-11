@@ -1,11 +1,9 @@
 package org.example.property;
 
 import lombok.RequiredArgsConstructor;
-import org.example.property.dto.PropertyDto;
-import org.example.property.dto.PropertyImageDto;
-import org.example.property.dto.PropertySaveDto;
-import org.example.property.dto.PropertyTypeDto;
+import org.example.property.dto.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,6 +45,7 @@ public class PropertyController {
     @ResponseStatus(HttpStatus.CREATED)
     public PropertyDto addProperty(@RequestBody PropertySaveDto propertySaveDto) {
         logger.info(String.format("add property with title %s", propertySaveDto.getTitle()));
+        logger.info("TIME:" + propertySaveDto.getLastPayment());//todel
         return propertyService.addProperty(propertySaveDto);
     }
 
@@ -55,6 +54,7 @@ public class PropertyController {
     public PropertyDto addPropertyByOwner(@RequestBody PropertySaveDto propertySaveDto,
                                           @RequestHeader("authorization") String token) {
         logger.info(String.format("add property by owner with title %s", propertySaveDto.getTitle()));
+        logger.info("TIME:" + propertySaveDto.getLastPayment());//todel
         return propertyService.addPropertyByOwner(propertySaveDto, token);
     }
 
@@ -92,5 +92,14 @@ public class PropertyController {
                                           @RequestHeader("authorization") String token) {
         logger.info(String.format("add property image"));
         propertyService.addPropertyImage(multipartFile, propertyId, token);
+    }
+    
+    @PatchMapping("/owner/{propertyId}/paid")
+    @ResponseStatus(HttpStatus.OK)
+    public PropertyDto updatePropertyPaidTime(@PathVariable Long propertyId,
+                                              @RequestBody PropertyPaidUpdateDto propertyPaidUpdateDto,
+                                              @RequestHeader("authorization") String token) {
+        logger.info(String.format("update property id=%d payment status", propertyId));
+        return propertyService.updatePropertyPaidTime(propertyId, propertyPaidUpdateDto, token);
     }
 }

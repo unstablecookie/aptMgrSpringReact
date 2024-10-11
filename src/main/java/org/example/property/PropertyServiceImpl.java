@@ -9,6 +9,7 @@ import org.example.property.model.PropertyImage;
 import org.example.user.UserRepository;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
+import org.example.util.error.PermissionViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -150,14 +151,6 @@ public class PropertyServiceImpl implements PropertyService {
         }
     }
 
-    private User getUserFromToken(String token) {
-        String jwt = token.substring(7);
-        String userName = jwtService.extractUsername(jwt);
-        return userRepository.findByName(userName).orElseThrow(
-                () -> new EntityNotFoundException(String.format("User with name=%s was not found", userName),
-                        "The required object was not found."));
-    }
-
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<PropertyImageDto> getPropertiesWithImages() {
@@ -166,6 +159,29 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
         updatePropertyDtoWithImages(properties);
         return properties;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Override
+    public PropertyDto updatePropertyPaidTime(Long propertyId, PropertyPaidUpdateDto propertyPaidUpdateDto, String token) {
+        Property property = propertyRepository.findById(propertyId).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
+                        "The required object was not found."));
+        User user = getUserFromToken(token);
+        if (!user.getId().equals(property.getUser().getId())) {
+            throw new PermissionViolationException(String.format("User with id=%d is not an owner", user.getId()),
+                    "Object permissions were violated!.");
+        }
+        Property updatedProperty = PropertyMapper.updatePropertyWithPayment(property, propertyPaidUpdateDto);
+        return PropertyMapper.toPropertyDto(propertyRepository.save(updatedProperty));
+    }
+
+    private User getUserFromToken(String token) {
+        String jwt = token.substring(7);
+        String userName = jwtService.extractUsername(jwt);
+        return userRepository.findByName(userName).orElseThrow(
+                () -> new EntityNotFoundException(String.format("User with name=%s was not found", userName),
+                        "The required object was not found."));
     }
 
     private void updatePropertyDtoWithImages(List<PropertyImageDto> properties) {

@@ -8,6 +8,7 @@ import NewPropertyByOwner from '../components/property/NewPropertyByOwner';
 import TopRibbon from '../components/menu/TopRibbon';
 
 const Dashboard = props => {
+
     const [showNewProperty, setShowNewProperty] = React.useState(false);
     const onClickNewProperty = () => setShowNewProperty(!showNewProperty);
   
@@ -20,6 +21,7 @@ const Dashboard = props => {
         <div>
           <header className="App-header" />
           <TopRibbon topHeader={toph3}/>
+          <button className='button-dashboard100'>Properties</button>
           <div onClick={onClickNewProperty}>
             <NewPropertyButton />
           </div>

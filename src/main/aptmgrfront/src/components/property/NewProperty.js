@@ -9,14 +9,26 @@ const NewProperty = props => {
     const [property, setProperty] = useState({
         title: "",
         propertyTypeId: 1,
+        buildIn: 1,
+        floorsNumb: 1,
+        sqrMeters: 1,
+        lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
+        monthlyPaid: false,
     });
     const [msg, setMsg] = useState("");
     const config = {
         headers: { Authorization: `Bearer ${props.token}` }
     };
+
     const [getTypes, setGetTypes] = useState([]);
+
     const handleChange = (e) => {
         const value = e.target.value;
+        setProperty({ ...property, [e.target.name]: value })
+    }
+
+    const changeDate = (e) => {
+        const value = e.target.value.replace('T',' ');
         setProperty({ ...property, [e.target.name]: value })
     }
 
@@ -24,11 +36,15 @@ const NewProperty = props => {
         e.preventDefault(); 
         PostService.saveEntity(API_URL, property, config)
             .then((res) => {
-                console.log("Property Added Successfully");
                 setMsg("Property Added Sucessfully");
                 setProperty({
                     title: "",
                     propertyTypeId: 1,
+                    buildIn: 1,
+                    floorsNumb: 1,
+                    sqrMeters: 1,
+                    lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
+                    monthlyPaid: false,
                 })
                 updateButton();
             }).catch((error) => {
@@ -76,6 +92,18 @@ const NewProperty = props => {
                                 <option key={i} value={type.id}>{type.type}</option>
                             )};
                         </select>
+                    </div>
+                    <div className="divborder">
+                        <input placeholder="build in" name="buildIn" onChange={(e) => handleChange(e)} value={property.buildIn} />
+                    </div>
+                    <div className="divborder">
+                        <input placeholder="floors number" name="floorsNumb" onChange={(e) => handleChange(e)} value={property.floorsNumb} />
+                    </div>
+                    <div className="divborder">
+                        <input placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} value={property.sqrMeters} />
+                    </div>
+                    <div className="divborder">
+                        <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)} value={property.datetime} />
                     </div>
                     <div className="divborder">
                         <button class="modern-small embossed-link-small" type="submit">Submit</button>

@@ -43,21 +43,17 @@ const LoadProperties = props => {
     }, []);
 
     const loadProperty = (e) => {
-      // console.log(e.property.id);
       async function fetchProperty(params) {
         const URL = `/properties/${params.property.id}`;
-        console.log(URL);
         try {
             const response = await axios.get(URL, config);
             setGetProperty(response);
             setPopUpActive(true);
-            // console.log(getProperty);
         } catch (error) {
             console.log(error);
         }
       }
       fetchProperty(e);
-      
     }
 
     const getImagePath = (e) => {
@@ -68,17 +64,24 @@ const LoadProperties = props => {
         }
     };
 
+    const VIRTUALIZED_OPTIONS = {
+      rowHeight: (_item, _index) => 1,
+    };
+
     if (!getProperties.nodes.length) return <h3>loading..</h3>;
 
     return (
       <div>
         <div className='table-header'>
         <Box p={3} borderWidth="1px" borderRadius="lg">
-          <Table data={getProperties} theme={theme}>
+          <Table data={getProperties}
+            virtualizedOptions={VIRTUALIZED_OPTIONS}
+            theme={theme}
+            layout={{ isDiv: true, fixedHeader: true }}>
           {(tableList) => (
             <>
               <Header>
-                <HeaderRow>
+                <HeaderRow >
                   <HeaderCell>id</HeaderCell>
                   <HeaderCell>title</HeaderCell>
                   <HeaderCell>type</HeaderCell>
@@ -98,7 +101,7 @@ const LoadProperties = props => {
                         alt=""
                       />
                     </Cell>
-                    <Cell onClick={() => loadProperty({property})}><div class="plainborder">click me</div></Cell>
+                    <Cell onClick={() => loadProperty({property})}><div class="plainborder">details</div></Cell>
                   </Row>
                 ))}
               </Body>
@@ -107,8 +110,8 @@ const LoadProperties = props => {
         </Table>
         </Box>
         </div>
-        <div style={{position: 'relative'}}>
-        { popUpActive ? <PopUpProperty active={popUpActive} setActive={setPopUpActive} child={getProperty}/> : null }
+        <div >
+        { popUpActive ? <PopUpProperty active={popUpActive} setActive={setPopUpActive} child={getProperty} token={props.token}/> : null }
         </div>
       </div>
     );

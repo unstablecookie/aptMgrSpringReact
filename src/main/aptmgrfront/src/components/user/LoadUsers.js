@@ -12,6 +12,7 @@ import {
     HeaderCell,
     Cell,
   } from "@table-library/react-table-library/table";
+import '../../styles/util.css'
 
 const LoadUsers = props => {
     const chakraTheme = getTheme(DEFAULT_OPTIONS);
@@ -39,29 +40,33 @@ const LoadUsers = props => {
     if (!getUsers.nodes.length) return <h3>loading..</h3>;
 
     return (
-      <Box p={3} borderWidth="1px" borderRadius="lg">
-        <Table data={getUsers} theme={theme}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>id</HeaderCell>
-                <HeaderCell>name</HeaderCell>
-              </HeaderRow>
-            </Header>
-            <Body>
-              {tableList.map((user, i) => (
-                <Row key={i} item={user}>
-                  <Cell>{i}</Cell>
-                  <Cell>{user.name}</Cell>
+      <div>
+        <div className='table-header'>
+          <Box p={3} borderWidth="1px" borderRadius="lg">
+            <Table data={getUsers} theme={theme}>
+            {(tableList) => (
+              <>
+                <Header>
+                  <HeaderRow>
+                    <HeaderCell>id</HeaderCell>
+                    <HeaderCell>name</HeaderCell>
+                  </HeaderRow>
+                </Header>
+                <Body>
+                  {tableList.map((user, i) => (
+                    <Row key={i} item={user}>
+                      <Cell>{i}</Cell>
+                      <Cell>{user.name}</Cell>
 
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-      </Box>
+                    </Row>
+                  ))}
+                </Body>
+              </>
+            )}
+          </Table>
+          </Box>
+        </div>
+      </div>
     );
 };
 

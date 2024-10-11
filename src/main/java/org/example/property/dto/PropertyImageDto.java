@@ -15,4 +15,9 @@ public class PropertyImageDto {
     private String propertyType;
     private Long ownerId;
     private byte[] data;
+    private Integer buildIn;
+    private Integer floorsNumb;
+    private Integer sqrMeters;
+    private String lastPayment;
+    private Boolean monthlyPaid;
 }

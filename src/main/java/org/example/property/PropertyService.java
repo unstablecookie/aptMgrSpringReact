@@ -1,10 +1,6 @@
 package org.example.property;
 
-import org.example.property.dto.PropertyDto;
-import org.example.property.dto.PropertyImageDto;
-import org.example.property.dto.PropertySaveDto;
-import org.example.property.dto.PropertyTypeDto;
-import org.example.property.model.PropertyType;
+import org.example.property.dto.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -33,4 +29,6 @@ public interface PropertyService {
     List<PropertyImageDto> getPropertiesWithImages();
 
     List<PropertyImageDto> getOwnerPropertiesWithImages(String token);
+
+    PropertyDto updatePropertyPaidTime(Long propertyId, PropertyPaidUpdateDto propertyPaidUpdateDto, String token);
 }

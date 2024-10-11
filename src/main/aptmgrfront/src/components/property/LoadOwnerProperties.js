@@ -70,42 +70,42 @@ const LoadOwnerProperties = props => {
     return (
       <div>
         <div className='table-header'>
-      <Box p={3} borderWidth="1px" borderRadius="lg">
-        <Table data={getProperties} theme={theme}>
-        {(tableList) => (
-          <>
-            <Header>
-              <HeaderRow>
-                <HeaderCell>id</HeaderCell>
-                <HeaderCell>title</HeaderCell>
-                <HeaderCell>type</HeaderCell>
-                <HeaderCell>image</HeaderCell>
-                <HeaderCell>view</HeaderCell>
-              </HeaderRow>
-            </Header>
-            <Body>
-              {tableList.map((property, i) => (
-                <Row key={i} item={property}>
-                  <Cell>{i}</Cell>
-                  <Cell>{property.title}</Cell>
-                  <Cell>{property.propertyType}</Cell>
-                  <Cell>
-                    <img className="thumbnail"
-                      src={getImagePath(property.data)}
-                      alt=""
-                    />
-                  </Cell>
-                  <Cell onClick={() => loadProperty({property})}><div class="plainborder">click me</div></Cell>
-                </Row>
-              ))}
-            </Body>
-          </>
-        )}
-      </Table>
-      </Box>
-      </div>
+          <Box p={3} borderWidth="1px" borderRadius="lg">
+            <Table data={getProperties} theme={theme}>
+            {(tableList) => (
+              <>
+                <Header>
+                  <HeaderRow>
+                    <HeaderCell>id</HeaderCell>
+                    <HeaderCell>title</HeaderCell>
+                    <HeaderCell>type</HeaderCell>
+                    <HeaderCell>image</HeaderCell>
+                    <HeaderCell>view</HeaderCell>
+                  </HeaderRow>
+                </Header>
+                <Body>
+                  {tableList.map((property, i) => (
+                    <Row key={i} item={property}>
+                      <Cell>{i}</Cell>
+                      <Cell>{property.title}</Cell>
+                      <Cell>{property.propertyType}</Cell>
+                      <Cell>
+                        <img className="thumbnail"
+                          src={getImagePath(property.data)}
+                          alt=""
+                        />
+                      </Cell>
+                      <Cell onClick={() => loadProperty({property})}><div class="plainborder">details</div></Cell>
+                    </Row>
+                  ))}
+                </Body>
+              </>
+            )}
+          </Table>
+          </Box>
+        </div>
       <div style={{position: 'relative'}}>
-        { popUpActive ? <PopUpProperty active={popUpActive} setActive={setPopUpActive} child={getProperty}/> : null }
+        { popUpActive ? <PopUpProperty active={popUpActive} setActive={setPopUpActive} child={getProperty} token={props.token}/> : null }
         </div>
       </div>
     );
