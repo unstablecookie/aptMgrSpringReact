@@ -3,9 +3,9 @@
 This is a web application to manage property.
 
 ## Tech stack:
-*RESTfull backend API.*
-*Back: Spring Boot, JPA, Spring security, PostgreSQL.*
-*Front: React.*
+### RESTfull backend API.
+### Back: Spring Boot, JPA, Spring security, PostgreSQL.
+### Front: React.
 
 *Main features:*
  - Spring security(token-based authentication. Basic auth is used to get the token. Stateless).
