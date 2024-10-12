@@ -28,8 +28,8 @@ Docker-ready compiled archieve is available in *releases*.
 copy /target
 	Dockerfile
 	docker-compose.yml from the archieve to your server.
-For example, to the
-/home/usr/aptmgr
+For example, to the /home/usr/aptmgr
+
 ![](/pics/inst1.jpg)
 
 and run 
@@ -38,15 +38,15 @@ sudo docker compose up
 ```
 ![](/pics/inst2.jpg)
 
-App will be awailable at http://DOCKER_SERVER_IP:8083
-default admin creds:
-username:admin
-password:admin
+App will be awailable at http://DOCKER_SERVER_IP:8083 .
+Default admin creds: admin\admin
 
 ERD:
+
 ![](/pics/ERD.JPG)
 
 App pics:
+
 ![](/pics/1.JPG)
 ![](/pics/2.JPG)
 ![](/pics/3.JPG)
