@@ -2,10 +2,10 @@
 
 This is a web application to manage property.
 
-*Tech stack:*
-## RESTfull backend API.
-## Back: Spring Boot, JPA, Spring security, PostgreSQL.
-## Front: React.
+## Tech stack:
+*RESTfull backend API.*
+*Back: Spring Boot, JPA, Spring security, PostgreSQL.*
+*Front: React.*
 
 *Main features:*
  - Spring security(token-based authentication. Basic auth is used to get the token. Stateless).
@@ -23,7 +23,7 @@ This is a web application to manage property.
 
 Docker-ready compiled archieve is available in *releases*.
 
-### How to install?
+## How to install?
 
 copy /target
 	Dockerfile
