@@ -117,13 +117,13 @@ const NewPropertyByOwner = props => {
                         </select>
                     </div>
                     <div className="divborder">
-                        <input placeholder="build in" name="buildIn" onChange={(e) => handleChange(e)} value={property.buildIn} />
+                        <input className='simple-input' placeholder="build in" name="buildIn" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input placeholder="floors number" name="floorsNumb" onChange={(e) => handleChange(e)} value={property.floorsNumb} />
+                        <input className='simple-input' placeholder="floors number" name="floorsNumb" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} value={property.sqrMeters} />
+                        <input className='simple-input' placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
                         <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)}/>

@@ -6,11 +6,13 @@ org\example\property\PropertyController.class
 org\example\security\JwtAuthenticationFilter.class
 org\example\user\model\RoleEnum.class
 org\example\property\model\Property.class
+org\example\property\dto\PropertyPaidUpdateDto.class
 org\example\property\PropertyTypeRepository.class
 org\example\property\PropertyServiceImpl.class
 org\example\property\dto\PropertyTypeDto$PropertyTypeDtoBuilder.class
 org\example\user\UserController.class
 org\example\user\UserService.class
+org\example\property\dto\PropertyPaidUpdateDto$PropertyPaidUpdateDtoBuilder.class
 org\example\user\dto\UserFormRoleDto.class
 org\example\security\AuthenticationServiceImpl.class
 org\example\property\dto\PropertyDto.class
@@ -57,3 +59,4 @@ org\example\controller\AuthController.class
 org\example\property\PropertyImageRepository.class
 org\example\user\AdminSeeder.class
 org\example\property\PropertyService.class
+org\example\util\error\PermissionViolationException.class

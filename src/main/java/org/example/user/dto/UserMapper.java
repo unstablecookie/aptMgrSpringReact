@@ -18,7 +18,7 @@ public class UserMapper {
                 .name(userDto.getName() != null ? userDto.getName() : null)
                 .build();
     }
-    
+
     public static void updateUser(User user, User updatedUser) {
         if (updatedUser.getName() != null) user.setName(updatedUser.getName());
     }

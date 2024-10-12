@@ -3,7 +3,6 @@ package org.example.property;
 import lombok.RequiredArgsConstructor;
 import org.example.property.dto.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -93,7 +92,7 @@ public class PropertyController {
         logger.info(String.format("add property image"));
         propertyService.addPropertyImage(multipartFile, propertyId, token);
     }
-    
+
     @PatchMapping("/owner/{propertyId}/paid")
     @ResponseStatus(HttpStatus.OK)
     public PropertyDto updatePropertyPaidTime(@PathVariable Long propertyId,

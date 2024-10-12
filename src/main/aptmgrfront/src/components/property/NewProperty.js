@@ -94,16 +94,16 @@ const NewProperty = props => {
                         </select>
                     </div>
                     <div className="divborder">
-                        <input placeholder="build in" name="buildIn" onChange={(e) => handleChange(e)} value={property.buildIn} />
+                        <input placeholder="build in" name="buildIn" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input placeholder="floors number" name="floorsNumb" onChange={(e) => handleChange(e)} value={property.floorsNumb} />
+                        <input placeholder="floors number" name="floorsNumb" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} value={property.sqrMeters} />
+                        <input placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)} value={property.datetime} />
+                        <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)} />
                     </div>
                     <div className="divborder">
                         <button class="modern-small embossed-link-small" type="submit">Submit</button>
