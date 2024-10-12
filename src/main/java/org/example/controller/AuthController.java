@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    
     private final AuthenticationService authenticationService;
     Logger logger = LoggerFactory.getLogger(AuthController.class);
 

@@ -9,6 +9,5 @@ import org.springframework.boot.actuate.autoconfigure.security.servlet.Managemen
 public class ApplicationEntry {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationEntry.class, args);
-        
     }
 }

@@ -5,6 +5,8 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\controller\IndexController.
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyImageDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyMapper.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyPaidUpdateDto.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertySaveDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyTypeDto.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\dto\PropertyTypeMapper.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\property\model\Property.java
@@ -42,3 +44,4 @@ D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\auth\LoginResponse.jav
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\CustomRestExceptionHandler.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\EntityNotFoundException.java
 D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\ErrorResponse.java
+D:\Java\yandex\aptMgrReact\src\main\java\org\example\util\error\PermissionViolationException.java

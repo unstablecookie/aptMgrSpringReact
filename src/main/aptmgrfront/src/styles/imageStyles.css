@@ -2,3 +2,10 @@
     width: 100px;
     height: auto;
 }
+
+.thumbnail-large {
+    background: #69D2E7;
+    width: 300px;
+    height: auto;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+}

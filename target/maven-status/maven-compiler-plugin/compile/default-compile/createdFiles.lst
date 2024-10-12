@@ -6,16 +6,19 @@ org\example\property\PropertyController.class
 org\example\security\JwtAuthenticationFilter.class
 org\example\user\model\RoleEnum.class
 org\example\property\model\Property.class
+org\example\property\dto\PropertyPaidUpdateDto.class
 org\example\property\PropertyTypeRepository.class
 org\example\property\PropertyServiceImpl.class
 org\example\property\dto\PropertyTypeDto$PropertyTypeDtoBuilder.class
 org\example\user\UserController.class
 org\example\user\UserService.class
+org\example\property\dto\PropertyPaidUpdateDto$PropertyPaidUpdateDtoBuilder.class
 org\example\user\dto\UserFormRoleDto.class
 org\example\security\AuthenticationServiceImpl.class
 org\example\property\dto\PropertyDto.class
 org\example\user\dto\UserFormRoleDto$UserFormRoleDtoBuilder.class
 org\example\property\dto\PropertyMapper.class
+org\example\property\dto\PropertySaveDto$PropertySaveDtoBuilder.class
 org\example\property\PropertyRepository.class
 org\example\user\UserRepository.class
 org\example\property\TypeSeeder.class
@@ -24,6 +27,7 @@ org\example\property\model\PropertyType$PropertyTypeBuilder.class
 org\example\util\CustomRestExceptionHandler.class
 org\example\user\model\Role.class
 org\example\property\dto\PropertyDto$PropertyDtoBuilder.class
+org\example\property\dto\PropertySaveDto.class
 org\example\user\dto\UserMapper.class
 org\example\property\model\PropertyImage.class
 org\example\util\auth\LoginResponse$LoginResponseBuilder.class
@@ -55,3 +59,4 @@ org\example\controller\AuthController.class
 org\example\property\PropertyImageRepository.class
 org\example\user\AdminSeeder.class
 org\example\property\PropertyService.class
+org\example\util\error\PermissionViolationException.class

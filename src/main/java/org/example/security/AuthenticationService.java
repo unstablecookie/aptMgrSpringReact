@@ -6,5 +6,6 @@ import org.example.util.auth.LoginResponse;
 
 public interface AuthenticationService {
     UserDto signup(UserAuthDto userAuthDto);
+
     LoginResponse authenticate(UserAuthDto userAuthDto);
 }

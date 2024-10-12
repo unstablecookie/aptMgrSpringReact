@@ -11,6 +11,11 @@ const NewPropertyByOwner = props => {
     const [property, setProperty] = useState({
         title: "",
         propertyTypeId: 1,
+        buildIn: 1,
+        floorsNumb: 1,
+        sqrMeters: 1,
+        lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
+        monthlyPaid: false,
     });  
     const [msg, setMsg] = useState("");
     const config = {
@@ -23,9 +28,13 @@ const NewPropertyByOwner = props => {
         setProperty({ ...property, [e.target.name]: value })
     }
 
+    const changeDate = (e) => {
+        const value = e.target.value.replace('T',' ');
+        setProperty({ ...property, [e.target.name]: value })
+    }
+
     const RegisterProperty = (e) => {
         e.preventDefault();
-        console.log(property);  
         PostService.saveEntity(API_URL, property, config)
             .then((res) => {
                 console.log("Property Added Successfully");
@@ -33,9 +42,13 @@ const NewPropertyByOwner = props => {
                 setProperty({
                     title: "",
                     propertyTypeId: 1,
+                    buildIn: 1,
+                    floorsNumb: 1,
+                    sqrMeters: 1,
+                    lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
+                    monthlyPaid: false,
                 })
                 updateButton();
-                console.log(res.data.id);
                 UploadSelectedImage(res.data.id);
             })
             .catch((error) => {
@@ -104,7 +117,19 @@ const NewPropertyByOwner = props => {
                         </select>
                     </div>
                     <div className="divborder">
-                        <input className='simple-input' type="file" name="myImage" onChange={(event) => {setSelectedImage(event.target.files[0]);}}/>
+                        <input className='simple-input' placeholder="build in" name="buildIn" onChange={(e) => handleChange(e)} />
+                    </div>
+                    <div className="divborder">
+                        <input className='simple-input' placeholder="floors number" name="floorsNumb" onChange={(e) => handleChange(e)} />
+                    </div>
+                    <div className="divborder">
+                        <input className='simple-input' placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} />
+                    </div>
+                    <div className="divborder">
+                        <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)}/>
+                    </div>
+                    <div className="divborder">
+                        <input className='simple-input' type="file" name="myImage" onChange={(e) => {setSelectedImage(e.target.files[0]);}}/>
                     </div>
                     <button class="modern-small embossed-link-small" type="submit">Submit</button>
                 </div>

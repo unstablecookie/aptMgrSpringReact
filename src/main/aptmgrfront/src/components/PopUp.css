@@ -1,0 +1,154 @@
+.popupc {
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.1s;
+
+}
+
+.popupc.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.popupc_content {
+    padding: 11px;
+    border-radius: 9px;
+    background-color: rgb(219, 219, 216);
+    width: 600px;
+    transform: scale(0.8);
+    transition: 0.1s all;
+    background: #ddd url(../styles/images/bg.jpg) repeat top left;
+}
+
+.popupc_content.active {
+    transform: scale(1);
+}
+
+p.popup-line {
+    right: 50%;
+    display: inline-block;
+    border: none;
+    border-radius: 8px;
+    color: #333;
+    box-shadow: 
+        inset 0 2px 0 rgba(0,0,0,.2), 
+        0 0 1px rgba(0,0,0,0.1);
+    padding-left: 10px;   
+    padding-right: 10px;
+    padding-top: 4px;
+    background-color: azure;
+    /* background-color: beige; */
+    /* border-style: inset; */
+}
+
+text.popup-line {
+    border-bottom: 1px dotted rgba(94, 112, 161, 0.9);
+    padding-right: 10px;
+}
+
+.img-position {
+    position: absolute;
+    top: 10%;
+}
+
+.sep-blocks {
+    display: inline-block;
+    width: 50%;
+}
+
+.bottom-line-gap {
+    padding-top: 20px;
+}
+
+/* The switch - the box around the slider */
+div.switch {
+    padding-bottom: 20px;
+    padding-left: 10px;
+}
+
+.switch {
+    font-size: 14px;
+    position: relative;
+    display: inline-block;
+    width: 4em;
+    height: 2em;
+
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 30px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 1.6em;
+    width: 1.6em;
+    border-radius: 20px;
+    left: 0.2em;
+    bottom: 0.2em;
+    background-color: white;
+    transition: 0.4s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .switch input:checked + .slider {
+    background-color: #4cc9f0;
+  }
+  
+  .switch input:focus + .slider {
+    box-shadow: 0 0 1px #4cc9f0;
+  }
+  
+  .switch input:checked + .slider:before {
+    transform: translateX(2em);
+    background-color: #4cc9f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Add some cool effects */
+  .slider:after {
+    content: "NO";
+    color: white;
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    transition: opacity 0.4s;
+    opacity: 1;
+  }
+  
+  .switch input:checked + .slider:after {
+    content: "YES";
+    left: 0.5em;
+    opacity: 1;
+    right: auto;
+  }
+  

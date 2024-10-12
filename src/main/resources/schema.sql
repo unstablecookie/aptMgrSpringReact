@@ -33,6 +33,11 @@ CREATE TABLE properties (
     title varchar NOT NULL,
     property_type_id bigint NOT NULL,
     owner_id bigint NOT NULL,
+    build_in smallint,
+    floors_numb smallint,
+    sqr_meters smallint,
+    last_payment timestamp WITHOUT TIME ZONE,
+    monthly_paid bool,
     FOREIGN KEY (property_type_id) REFERENCES property_types(id),
     FOREIGN KEY (owner_id) REFERENCES users(id)
 );

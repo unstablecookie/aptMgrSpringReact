@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.user.model.User;
 
+import java.time.LocalDateTime;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,10 +24,26 @@ public class Property {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "property_type_id")
-    private Long propertyTypeId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "property_type_id")
+    private PropertyType propertyType;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private User user;
+
+    @Column(name = "build_in")
+    private Integer buildIn;
+
+    @Column(name = "floors_numb")
+    private Integer floorsNumb;
+
+    @Column(name = "sqr_meters")
+    private Integer sqrMeters;
+
+    @Column(name = "last_payment")
+    private LocalDateTime lastPayment;
+
+    @Column(name = "monthly_paid")
+    private Boolean monthlyPaid;
 }
