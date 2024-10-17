@@ -64,10 +64,6 @@ const LoadProperties = props => {
         }
     };
 
-    const VIRTUALIZED_OPTIONS = {
-      rowHeight: (_item, _index) => 1,
-    };
-
     if (!getProperties.nodes.length) return <h3>loading..</h3>;
 
     return (
@@ -75,7 +71,6 @@ const LoadProperties = props => {
         <div className='table-header'>
         <Box p={3} borderWidth="1px" borderRadius="lg">
           <Table data={getProperties}
-            virtualizedOptions={VIRTUALIZED_OPTIONS}
             theme={theme}
             layout={{ isDiv: true, fixedHeader: true }}>
           {(tableList) => (
@@ -101,7 +96,7 @@ const LoadProperties = props => {
                         alt=""
                       />
                     </Cell>
-                    <Cell onClick={() => loadProperty({property})}><div class="plainborder">details</div></Cell>
+                    <Cell onClick={() => loadProperty({property})}><div className="plainborder">details</div></Cell>
                   </Row>
                 ))}
               </Body>

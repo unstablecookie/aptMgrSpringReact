@@ -54,10 +54,10 @@ const SignUp = props => {
                             <input className='depth' placeholder='Confirm Password' id='confirmPassword' type='password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                         </div>
                         <div className="divborder">
-                            <button class="modern-small embossed-link-small" onClick={handleSignup}>Sign Up</button>
+                            <button className="modern-small embossed-link-small" onClick={handleSignup}>Sign Up</button>
                         </div>
                         <div className="divborder">
-                            <p>Already Register? <a href="/">Login</a></p>
+                            <p>Already Registered? <a href="/">Login</a></p>
                         </div>
                 </div>
             </div>

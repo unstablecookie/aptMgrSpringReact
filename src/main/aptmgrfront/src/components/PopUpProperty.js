@@ -1,8 +1,9 @@
 import React, { useState }  from 'react';
-import axios from "axios";
 import './PopUp.css';
+import '../components/Border.css';
 import HomeIcon from '../styles/images/home_icon.png';
 import PatchServie from './PatchServie';
+import RightRibbon from './menu/RightRibbon';
 
 
 const PopUpProperty = ({ active, setActive, child, token}) => {
@@ -24,15 +25,23 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
         monthlyPaid: paidCheck,
     });
 
-    
+    const [updateFullProperty, setUpdateFullProperty] = useState({
+        title: child.data.title,
+        buildIn: child.data.buildIn,
+        floorsNumb: child.data.floorsNumb,
+        sqrMeters: child.data.sqrMeters,
+        lastPayment: child.data.lastPayment,
+        monthlyPaid: paidCheck,
+    });
+
     const handlePaidSwich = (e) => {
         e.preventDefault();
         const URL = `/properties/owner/${child.data.id}/paid`;
         const updateProperty = {
-            lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
+            lastPayment: updateFullProperty.lastPayment,
             monthlyPaid: true,
         }
-        PatchServie.saveEntity(URL, updateProperty, config)
+        PatchServie.updateEntity(URL, updateProperty, config)
             .then(() => {
                 setProperty({
                     lastPayment: updateProperty.lastPayment,
@@ -47,40 +56,72 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
                 monthlyPaid: paidCheck,
             })
         });
-        
-      }
+    }
+    const handleChange = (e) => {
+        const value = e.target.value;
+        setUpdateFullProperty({ ...updateFullProperty, [e.target.name]: value })
+    }
+
+    const changeDate = (e) => {
+        var value = e.target.value.replace('T',' ');
+        if (value.length < 18) {
+            value = value + ":00";
+        }
+        setUpdateFullProperty({ ...updateFullProperty, [e.target.name]: value })
+    }
 
     return (
         <div className={active ? "popupc active" : "popupc"} onClick={ () => setActive(false)}>
             <div className={active ? "popupc_content active" : "popupc_content"} onClick={e => e.stopPropagation()}>
                 <div className='sep-blocks'>
                     <div>
-                        <text className='popup-line'>Id: </text><p className='popup-line'>{child.data.id}</p>
+                        <label className='popup-line-text'>Id: </label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='number' value={child.data.id} readOnly/>
                     </div>
                     <div>
-                        <text className='popup-line'>Title: </text><p className='popup-line'>{child.data.title}</p>
+                        <label className='popup-line-text'>Title: </label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='text' name='title' defaultValue={child.data.title} onChange={(e) => handleChange(e)}/>
                     </div>
                     <div>
-                        <text className='popup-line'>Property type:</text><p className='popup-line'>{child.data.propertyType}</p>
+                        <label className='popup-line-text'>Property type:</label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='text' value={child.data.propertyType} readOnly/>
                     </div>
                     <div>
-                        <text className='popup-line'>Build in: </text><p className='popup-line'>{child.data.buildIn}</p>
+                        <label className='popup-line-text'>Build in: </label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='number' name='buildIn' defaultValue={child.data.buildIn} onChange={(e) => handleChange(e)}/>
                     </div>
                     <div>
-                        <text className='popup-line'>Floors: </text><p className='popup-line'>{child.data.floorsNumb}</p>
+                        <label className='popup-line-text'>Floors: </label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='number' name='floorsNumb' defaultValue={child.data.floorsNumb} onChange={(e) => handleChange(e)}/>
                     </div>
                     <div>
-                        <text className='popup-line'>Square meters: </text><p className='popup-line'>{child.data.sqrMeters}</p>
+                        <label className='popup-line-text'>Square meters: </label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='number' name='sqrMeters' defaultValue={child.data.sqrMeters} onChange={(e) => handleChange(e)}/>
                     </div>
                     <div>
-                        <text className='popup-line'>Last payment: </text><p className='popup-line'>{property.lastPayment}</p>
+                        <label className='popup-line-text'>Last payment: </label>
+                    </div>
+                    <div className="divborder">
+                        <input className='popup-line' type='datetime-local' name='lastPayment' step='1' defaultValue={child.data.lastPayment} onChange={(e) => changeDate(e)}/>
                     </div>
                     <div>
-                    <text className='popup-line'>Is it paid? </text>
+                    <label className='popup-line-text'>Is it paid? </label>
                         <div className='switch bottom-line-gap'>
-                            <label class="switch">
-                                <input type="checkbox" checked={paidCheck} defaultChecked={false} onChange={(e) => handlePaidSwich(e)}/>
-                                <span class="slider"></span>
+                            <label className="switch">
+                                <input type="checkbox" checked={paidCheck} onChange={(e) => handlePaidSwich(e)}/>
+                                <span className="slider"></span>
                             </label>
                         </div>
                     </div>
@@ -91,6 +132,9 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
                         src={getImagePath(child.data.data)}
                         alt=""/>
                     </div>
+                </div>
+                <div className='side-panel'>
+                    <RightRibbon child={child} token={token} popUpActive={setActive} propertyFull={updateFullProperty}/>
                 </div>
             </div>
         </div>

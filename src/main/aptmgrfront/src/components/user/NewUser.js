@@ -64,9 +64,9 @@ const NewUser = props => {
             <div>
                 {msg && <p>{msg}</p>}
             </div>
-            <form class="form" onSubmit={(e) => RegisterUser(e)}>
+            <form className="form" onSubmit={(e) => RegisterUser(e)}>
                 <div className="divborder">
-                    <span class="title">sign up</span>
+                    <span className="title">sign up</span>
                 </div>
                 <div>
                     <div className="divborder">
@@ -84,7 +84,7 @@ const NewUser = props => {
                         </select>
                     </div>
                     <div className="divborder">
-                        <button class="modern-small embossed-link-small" type="submit">Submit</button>
+                        <button className="modern-small embossed-link-small" type="submit">Submit</button>
                     </div>
                 </div>
             </form>

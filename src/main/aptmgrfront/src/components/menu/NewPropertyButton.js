@@ -4,7 +4,7 @@ import './buttons.css';
 const NewPropertyButton = props => {
     return (
         <div>
-            <button class="modern embossed-link">new property</button>
+            <button className="modern embossed-link">new property</button>
         </div>
     );
 };

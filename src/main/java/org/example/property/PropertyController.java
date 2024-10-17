@@ -44,7 +44,6 @@ public class PropertyController {
     @ResponseStatus(HttpStatus.CREATED)
     public PropertyDto addProperty(@RequestBody PropertySaveDto propertySaveDto) {
         logger.info(String.format("add property with title %s", propertySaveDto.getTitle()));
-        logger.info("TIME:" + propertySaveDto.getLastPayment());//todel
         return propertyService.addProperty(propertySaveDto);
     }
 
@@ -53,22 +52,22 @@ public class PropertyController {
     public PropertyDto addPropertyByOwner(@RequestBody PropertySaveDto propertySaveDto,
                                           @RequestHeader("authorization") String token) {
         logger.info(String.format("add property by owner with title %s", propertySaveDto.getTitle()));
-        logger.info("TIME:" + propertySaveDto.getLastPayment());//todel
         return propertyService.addPropertyByOwner(propertySaveDto, token);
     }
 
     @PatchMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.OK)
-    public PropertyDto updateProperty(@PathVariable Long propertyId, @RequestBody PropertySaveDto propertySaveDto) {
+    public PropertyDto updateProperty(@PathVariable Long propertyId, @RequestBody PropertySaveDto propertySaveDto,
+                                      @RequestHeader("authorization") String token) {
         logger.info(String.format("update property with id=%d", propertyId));
-        return propertyService.updateProperty(propertyId, propertySaveDto);
+        return propertyService.updateProperty(propertyId, propertySaveDto, token);
     }
 
     @DeleteMapping("/{propertyId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProperty(@PathVariable Long propertyId) {
+    public void deleteProperty(@PathVariable Long propertyId, @RequestHeader("authorization") String token) {
         logger.info(String.format("delete property with id=%d", propertyId));
-        propertyService.deleteProperty(propertyId);
+        propertyService.deleteProperty(propertyId, token);
     }
 
     @GetMapping(value = "/types")

@@ -4,7 +4,7 @@ import './buttons.css';
 const NewUserButton = props => {
     return (
         <div>
-            <button class="modern embossed-link">new user</button>
+            <button className="modern embossed-link">new user</button>
         </div>
     );
 };

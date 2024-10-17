@@ -47,7 +47,7 @@ const LogIn = props => {
                         {error && <p className="text-danger">{error}</p>}
                     </div>
                     <div className="divborder">
-                        <button class="modern-small embossed-link-small" onClick={handleLogin}>Sign in</button>
+                        <button className="modern-small embossed-link-small" onClick={handleLogin}>Sign in</button>
                     </div>
                     <div className="divborder">
                         <p>Not a member? <a href="/signup" >Register</a></p>

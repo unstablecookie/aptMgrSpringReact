@@ -95,7 +95,7 @@ const LoadOwnerProperties = props => {
                           alt=""
                         />
                       </Cell>
-                      <Cell onClick={() => loadProperty({property})}><div class="plainborder">details</div></Cell>
+                      <Cell onClick={() => loadProperty({property})}><div className="plainborder">details</div></Cell>
                     </Row>
                   ))}
                 </Body>

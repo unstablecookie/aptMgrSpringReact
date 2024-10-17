@@ -7,6 +7,8 @@ import org.example.property.dto.*;
 import org.example.property.model.Property;
 import org.example.property.model.PropertyImage;
 import org.example.user.UserRepository;
+import org.example.user.model.Role;
+import org.example.user.model.RoleEnum;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
 import org.example.util.error.PermissionViolationException;
@@ -86,13 +88,18 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
-    public PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto) {
+    public PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto, String token) {
+        User user = getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
-        PropertyType propertyType = propertyTypeRepository.findById(propertySaveDto.getPropertyTypeId()).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Type with id=%d was not found", propertySaveDto.getPropertyTypeId()),
-                        "The required object was not found."));
+        if (!property.getUser().getId().equals(user.getId())) {
+            List<Role> roles = user.getRoles();
+            roles.stream().filter(x -> x.getName().equals(RoleEnum.ADMIN)).findAny().orElseThrow(
+                    () -> new PermissionViolationException(String.format("User with id=%d is not an owner or ADMIN", user.getId()),
+                            "Object permissions were violated!."));
+        }
+        PropertyType propertyType = property.getPropertyType();
         Property updatedProperty = PropertyMapper.toProperty(propertySaveDto, propertyType);
         PropertyMapper.updateProperty(property, propertyType, updatedProperty);
         return PropertyMapper.toPropertyDto(propertyRepository.save(property));
@@ -100,10 +107,21 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
-    public void deleteProperty(Long propertyId) {
+    public void deleteProperty(Long propertyId, String token) {
+        User user = getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
+        if (!property.getUser().getId().equals(user.getId())) {
+            List<Role> roles = user.getRoles();
+            roles.stream().filter(x -> x.getName().equals(RoleEnum.ADMIN)).findAny().orElseThrow(
+                    () -> new PermissionViolationException(String.format("User with id=%d is not an owner or ADMIN", user.getId()),
+                    "Object permissions were violated!."));
+        }
+        PropertyImage propertyImage = propertyImageRepository.findByPropertyId(propertyId);
+        if (propertyImage != null) {
+            propertyImageRepository.delete(propertyImage);
+        }
         propertyRepository.delete(property);
     }
 

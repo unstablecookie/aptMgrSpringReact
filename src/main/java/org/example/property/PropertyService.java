@@ -10,13 +10,13 @@ public interface PropertyService {
 
     PropertyDto addProperty(PropertySaveDto propertySaveDto);
 
-    PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto);
+    PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto, String token);
 
     PropertyImageDto getProperty(Long propertyId, String token);
 
     PropertyImageDto getPropertyByOwner(Long propertyId, String token);
 
-    void deleteProperty(Long propertyId);
+    void deleteProperty(Long propertyId, String token);
 
     List<PropertyTypeDto> getPropertyTypes();
 
