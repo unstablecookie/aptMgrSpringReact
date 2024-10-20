@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: 'aptmgr.0.1'
+    image: 'aptmgr.0.2'
     build:
       context: .
     container_name: aptmgr

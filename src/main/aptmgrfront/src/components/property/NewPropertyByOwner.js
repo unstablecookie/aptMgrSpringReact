@@ -100,9 +100,9 @@ const NewPropertyByOwner = props => {
             <div className="divborder">
                 {msg && <p>{msg}</p>}
             </div>
-            <form class="form" onSubmit={(e) => RegisterProperty(e)}>
+            <form className="form" onSubmit={(e) => RegisterProperty(e)}>
                 <div className="divborder">
-                    <span class="title">add new property</span>
+                    <span className="title">add new property</span>
                 </div>
                 <div>
                     <div className="divborder">
@@ -131,7 +131,7 @@ const NewPropertyByOwner = props => {
                     <div className="divborder">
                         <input className='simple-input' type="file" name="myImage" onChange={(e) => {setSelectedImage(e.target.files[0]);}}/>
                     </div>
-                    <button class="modern-small embossed-link-small" type="submit">Submit</button>
+                    <button className="modern-small embossed-link-small" type="submit">Submit</button>
                 </div>
             </form>
         </div>

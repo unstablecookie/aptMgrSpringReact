@@ -1,0 +1,44 @@
+.modern-yellow {
+    width: 100%;
+    height: 40px;
+    background: #dad715f3;
+    border: 1px solid rgba(0, 0, 0, 0.151);
+    transition: all 0.1s ease-out;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 
+        0 0 4px 1px rgba(0,0,0,0.2); 
+    font-size: 16px;
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255,255,255,0.7);
+}
+
+.modern-yellow:hover {
+    background: #dbda73f3;
+}
+
+
+.embossed-link-yellow {
+    box-shadow: 
+        inset 0 3px 2px rgba(255,255,255,.22), 
+        inset 0 -3px 2px rgba(0,0,0,.17), 
+        inset 0 20px 10px rgba(255,255,255,.12), 
+        0 0 4px 1px rgba(0,0,0,.1), 
+        0 3px 2px rgba(0,0,0,.2);
+}
+
+.modern-yellow.embossed-link-yellow {
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 0 0 4px 1px rgba(0,0,0,0.2), 
+        inset 0 3px 2px rgba(255,255,255,.22), 
+        inset 0 -3px 2px rgba(0,0,0,.15), 
+        inset 0 20px 10px rgba(255,255,255,.12), 
+        0 0 4px 1px rgba(0,0,0,.1), 0 3px 2px rgba(0,0,0,.2);
+}
+
+.modern-yellow.embossed-link-yellow:active {
+    box-shadow: 
+        inset 0 -2px 1px rgba(255,255,255,0.2), 
+        inset 0 3px 2px rgba(0,0,0,0.12);
+}

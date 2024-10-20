@@ -61,6 +61,11 @@ public class PropertyMapper {
 
     public static void updateProperty(Property property, PropertyType propertyType, Property updatedProperty) {
         if (updatedProperty.getTitle() != null) property.setTitle(updatedProperty.getTitle());
+        if (updatedProperty.getBuildIn() != null) property.setBuildIn(updatedProperty.getBuildIn());
+        if (updatedProperty.getFloorsNumb() != null) property.setFloorsNumb(updatedProperty.getFloorsNumb());
+        if (updatedProperty.getSqrMeters() != null) property.setSqrMeters(updatedProperty.getSqrMeters());
+        if (updatedProperty.getLastPayment() != null) property.setLastPayment(updatedProperty.getLastPayment());
+        if (updatedProperty.getMonthlyPaid() != null) property.setMonthlyPaid(updatedProperty.getMonthlyPaid());
         if (propertyType != null) property.setPropertyType(propertyType);
     }
 

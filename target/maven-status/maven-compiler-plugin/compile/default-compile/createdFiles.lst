@@ -57,6 +57,7 @@ org\example\property\model\PropertyImage$PropertyImageBuilder.class
 org\example\util\error\ErrorResponse.class
 org\example\controller\AuthController.class
 org\example\property\PropertyImageRepository.class
+org\example\property\PropertyRepositoryPageAndSort.class
 org\example\user\AdminSeeder.class
 org\example\property\PropertyService.class
 org\example\util\error\PermissionViolationException.class
