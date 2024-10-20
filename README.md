@@ -2,10 +2,12 @@
 
 This is a web application to manage property.
 
+
 *Tech stack:*
 ## RESTfull backend API.
 ## Back: Spring Boot, Maven, JPA, Spring security, PostgreSQL.
 ## Front: React.
+
 
 
 ![](/pics/3.JPG)
@@ -27,13 +29,13 @@ This is a web application to manage property.
 
 Docker-ready compiled archieve is available in *releases*.
 
-### How to install?
+## How to install?
 
 copy /target
 	Dockerfile
 	docker-compose.yml from the archieve to your server.
-For example, to the
-/home/usr/aptmgr
+For example, to the /home/usr/aptmgr
+
 ![](/pics/inst1.jpg)
 
 and run 
@@ -42,12 +44,11 @@ sudo docker compose up
 ```
 ![](/pics/inst2.jpg)
 
-App will be awailable at http://DOCKER_SERVER_IP:8083
-default admin creds:
-username:admin
-password:admin
+App will be awailable at http://DOCKER_SERVER_IP:8083 .
+Default admin creds: admin\admin
 
 ERD:
+
 ![](/pics/ERD.JPG)
 
 Some other pics:
