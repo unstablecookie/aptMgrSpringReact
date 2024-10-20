@@ -4,8 +4,12 @@ This is a web application to manage property.
 
 *Tech stack:*
 ## RESTfull backend API.
-## Back: Spring Boot, JPA, Spring security, PostgreSQL.
+## Back: Spring Boot, Maven, JPA, Spring security, PostgreSQL.
 ## Front: React.
+
+
+![](/pics/3.JPG)
+
 
 *Main features:*
  - Spring security(token-based authentication. Basic auth is used to get the token. Stateless).
@@ -46,8 +50,6 @@ password:admin
 ERD:
 ![](/pics/ERD.JPG)
 
-App pics:
+Some other pics:
 ![](/pics/1.JPG)
 ![](/pics/2.JPG)
-![](/pics/3.JPG)
-![](/pics/4D.JPG)

@@ -12,20 +12,83 @@ import {
     HeaderCell,
     Cell,
   } from "@table-library/react-table-library/table";
-import '../../styles/imageStyles.css'
-import '../../styles/util.css'
+import { usePagination } from "@table-library/react-table-library/pagination";
+import '../../styles/imageStyles.css';
+import '../../styles/util.css';
+import '../menu/button-next-page.css';
 import HomeIcon from '../../styles/images/home_icon.png';
 import PopUpProperty from '../PopUpProperty';
 
 const LoadOwnerProperties = props => {
+    const LIMIT = 5;
     const chakraTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(chakraTheme);
     const [getProperties, setGetProperties] = useState({nodes: [],});
     const [getProperty, setGetProperty] = useState({});
     const config = {
-      headers: { Authorization: `Bearer ${props.token}` }
+      headers: { Authorization: `Bearer ${props.token}` },
+      params: {
+        from: 0,
+        size: LIMIT,
+      },
     };
     const [popUpActive, setPopUpActive] = useState(false);
+    const [counter, setCounter] = useState(0);
+
+    const pagination = usePagination(
+      getProperties,
+      {
+        state: {
+          page: 0,
+          size: LIMIT,
+        },
+        onChange: onPaginationChange,
+      },
+      {
+        isServer: true,
+      }
+    );
+
+    function onPaginationChange(action, state) {
+      async function fetchPagedProperties(params) {
+        const URL = "/properties/owner";
+        const updateConfig = {
+          headers: { Authorization: `Bearer ${props.token}` },
+          params: {
+            from: (params * LIMIT),
+            size: LIMIT,
+          },
+        };
+        try {
+            const response = await axios.get(URL, updateConfig);
+            setGetProperties({
+              nodes: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+      }
+      fetchPagedProperties(action.payload.page);
+    }
+
+    useEffect(() => {
+      async function fetchCount(params) {
+        const URL = "/properties/owner/count";
+        try {
+          const response = await axios.get(URL, config);
+          var maxEntities;
+          if (response.data <= LIMIT) {
+            maxEntities = 1;
+          } else {
+            maxEntities = Number((response.data / LIMIT).toFixed())  + 1;
+          }
+          setCounter(maxEntities);
+          } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchCount();
+    }, []);
 
     useEffect(() => {
         async function fetchProperties(params) {
@@ -65,13 +128,15 @@ const LoadOwnerProperties = props => {
       }
     };
 
-    if (!getProperties.nodes.length) return <h3>loading..</h3>;
+    // if (!getProperties.nodes.length) return <h3>loading..</h3>;
 
     return (
       <div>
         <div className='table-header'>
           <Box p={3} borderWidth="1px" borderRadius="lg">
-            <Table data={getProperties} theme={theme}>
+            <Table data={getProperties} pagination={pagination} 
+            theme={theme}
+            layout={{ isDiv: true, fixedHeader: true }}>
             {(tableList) => (
               <>
                 <Header>
@@ -102,6 +167,32 @@ const LoadOwnerProperties = props => {
               </>
             )}
           </Table>
+            {true && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <span>Total Pages: {counter}</span>
+
+                <span>
+                  Page:{" "}
+                  {Array(counter)
+                    .fill()
+                    .map((_, index) => (
+                      <button className='modern-nextpage'
+                        key={index}
+                        type="button"
+                        onClick={() => pagination.fns.onSetPage(index)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                </span>
+              </div>
+
+            )}
           </Box>
         </div>
       <div style={{position: 'relative'}}>

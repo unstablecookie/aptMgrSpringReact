@@ -15,6 +15,7 @@ import org.example.util.error.PermissionViolationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.PageRequest;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService {
     private final PropertyRepository propertyRepository;
+    private final PropertyRepositoryPageAndSort propertyRepositoryPageAndSort;
     private final UserRepository userRepository;
     private final PropertyTypeRepository propertyTypeRepository;
 
@@ -143,9 +145,10 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
-    public List<PropertyImageDto> getOwnerPropertiesWithImages(String token) {
+    public List<PropertyImageDto> getOwnerPropertiesWithImages(String token, int from, int size) {
+        PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
         User user = getUserFromToken(token);
-        List<PropertyImageDto> properties = propertyRepository.findByUserId(user.getId()).stream()
+        List<PropertyImageDto> properties = propertyRepository.findByUserId(user.getId(), page).stream()
                 .map(x -> PropertyMapper.toPropertyImageDto(x))
                 .collect(Collectors.toList());
         updatePropertyDtoWithImages(properties);
@@ -171,8 +174,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
-    public List<PropertyImageDto> getPropertiesWithImages() {
-        List<PropertyImageDto> properties = propertyRepository.findAll().stream()
+    public List<PropertyImageDto> getPropertiesWithImages(int from, int size) {
+        PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
+        List<PropertyImageDto> properties = propertyRepositoryPageAndSort.findAll(page).stream()
                 .map(x -> PropertyMapper.toPropertyImageDto(x))
                 .collect(Collectors.toList());
         updatePropertyDtoWithImages(properties);
@@ -192,6 +196,19 @@ public class PropertyServiceImpl implements PropertyService {
         }
         Property updatedProperty = PropertyMapper.updatePropertyWithPayment(property, propertyPaidUpdateDto);
         return PropertyMapper.toPropertyDto(propertyRepository.save(updatedProperty));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Override
+    public Long countProperty() {
+        return propertyRepository.count();
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Override
+    public Long countOwnerProperty(String token) {
+        User user = getUserFromToken(token);
+        return propertyRepository.countByUserId(user.getId());
     }
 
     private User getUserFromToken(String token) {
