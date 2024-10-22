@@ -8,6 +8,7 @@ services:
     container_name: aptmgr
     depends_on:
       - db
+      - cache
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/aptmgr
 
@@ -23,3 +24,11 @@ services:
       - POSTGRES_DB=aptmgr
     ports:
       - "6541:5432"
+
+  cache:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --bind 0.0.0.0

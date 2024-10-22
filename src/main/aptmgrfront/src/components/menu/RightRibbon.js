@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import '../../styles/darkribbon.css'
 import '../PopUp.css'
 import DeleteButton from './DeleteButton'
@@ -19,7 +18,7 @@ const RightRibbon = ({child, token, popUpActive, propertyFull}) => {
         });
         popUpActive(false);
     }
-    
+
     const onClickUpdate = (e) => {
         e.preventDefault();
         const URL = `/properties/${child.data.id}`;

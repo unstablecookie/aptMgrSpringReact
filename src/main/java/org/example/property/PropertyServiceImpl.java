@@ -12,6 +12,8 @@ import org.example.user.model.RoleEnum;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
 import org.example.util.error.PermissionViolationException;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +44,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
+    @Cacheable(value = "property", key = "#propertyId")
     public PropertyImageDto getProperty(Long propertyId, String token) {
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
@@ -53,6 +56,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
+    @Cacheable(value = "property", key = "#propertyId")
     public PropertyImageDto getPropertyByOwner(Long propertyId, String token) {
         User user = getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
@@ -90,6 +94,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
+    @CacheEvict(cacheNames = "property", allEntries = true)
     public PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto, String token) {
         User user = getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
@@ -109,6 +114,7 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
+    @CacheEvict(cacheNames = "property", allEntries = true)
     public void deleteProperty(Long propertyId, String token) {
         User user = getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(

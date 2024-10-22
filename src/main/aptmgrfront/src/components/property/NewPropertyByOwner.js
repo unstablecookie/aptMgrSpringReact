@@ -16,7 +16,8 @@ const NewPropertyByOwner = props => {
         sqrMeters: 1,
         lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
         monthlyPaid: false,
-    });  
+    });
+    const currDate = new Date().toISOString().replace('T',' ').substring(0, 19);
     const [msg, setMsg] = useState("");
     const config = {
         headers: { Authorization: `Bearer ${props.token}` }
@@ -126,7 +127,7 @@ const NewPropertyByOwner = props => {
                         <input className='simple-input' placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)}/>
+                        <input type="datetime-local" name="lastPayment" step="1" defaultValue={currDate} onChange={(e) => changeDate(e)}/>
                     </div>
                     <div className="divborder">
                         <input className='simple-input' type="file" name="myImage" onChange={(e) => {setSelectedImage(e.target.files[0]);}}/>
