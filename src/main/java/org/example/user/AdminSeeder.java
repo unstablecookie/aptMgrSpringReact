@@ -38,6 +38,7 @@ public class AdminSeeder implements ApplicationListener<ContextRefreshedEvent> {
         User user = User.builder()
                 .name("admin")
                 .password(passwordEncoder.encode("admin"))
+                .isNotLocked(Boolean.TRUE)
                 .roles(List.of(role))
                 .build();
         userRepository.save(user);

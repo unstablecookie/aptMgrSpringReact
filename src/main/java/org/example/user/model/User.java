@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "isnotlocked")
+    private Boolean isNotLocked;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -46,6 +49,11 @@ public class User implements UserDetails {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + r.getName().toString()));
         }
         return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isNotLocked;
     }
 
     @Override

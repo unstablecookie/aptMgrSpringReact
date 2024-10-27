@@ -15,6 +15,9 @@ const NewProperty = props => {
         lastPayment: new Date().toISOString().replace('T',' ').substring(0, 19),
         monthlyPaid: false,
     });
+
+    const currDate = new Date().toISOString().replace('T',' ').substring(0, 19);
+
     const [msg, setMsg] = useState("");
     const config = {
         headers: { Authorization: `Bearer ${props.token}` }
@@ -103,7 +106,7 @@ const NewProperty = props => {
                         <input placeholder="sqr meters" name="sqrMeters" onChange={(e) => handleChange(e)} />
                     </div>
                     <div className="divborder">
-                        <input type="datetime-local" name="lastPayment" step="1" onChange={(e) => changeDate(e)} />
+                        <input type="datetime-local" name="lastPayment" step="1" defaultValue={currDate} onChange={(e) => changeDate(e)} />
                     </div>
                     <div className="divborder">
                         <button class="modern-small embossed-link-small" type="submit">Submit</button>

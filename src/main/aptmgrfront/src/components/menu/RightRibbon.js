@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import '../../styles/darkribbon.css'
 import '../PopUp.css'
 import DeleteButton from './DeleteButton'
@@ -6,24 +5,24 @@ import DeleteService from '../DeleteService';
 import UpdateButton from './UpdateButton';
 import PatchServie from '../PatchServie';
 
-const RightRibbon = ({child, token, popUpActive, propertyFull}) => {
+const RightRibbon = ({child, token, popUpActive, entityFull, entity}) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
     const onClickDelete = (e) => {
         e.preventDefault();
-        const URL = `/properties/${child.data.id}`;
+        const URL = `/${entity}/${child.data.id}`;
         DeleteService.deleteEntity(URL, config)
             .catch((error) => {
             console.log(error);
         });
         popUpActive(false);
     }
-    
+
     const onClickUpdate = (e) => {
         e.preventDefault();
-        const URL = `/properties/${child.data.id}`;
-        PatchServie.updateEntity(URL, propertyFull, config)
+        const URL = `/${entity}/${child.data.id}`;
+        PatchServie.updateEntity(URL, entityFull, config)
             .catch((error) => {
             console.log(error);
         });
