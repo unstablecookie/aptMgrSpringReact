@@ -6,6 +6,7 @@ This is a web application to manage property.
 *Tech stack:*
 ## RESTfull backend API.
 ## Back: Spring Boot, Maven, JPA, Spring security, PostgreSQL.
+## Cache: Redis.
 ## Front: React.
 
 
@@ -15,6 +16,7 @@ This is a web application to manage property.
 
 *Main features:*
  - Spring security(token-based authentication. Basic auth is used to get the token. Stateless).
+ - Users can be locked out.
  - API is Role-based protected. (ADMIN, USER - default roles).
  - Add\view properties.
 
@@ -23,7 +25,6 @@ This is a web application to manage property.
  - Validation.
  - Tests.
  - More tests(postman).
- - Profiles.
  - Ability to plan and save property plan with https://unstablecookie.github.io/basichouseplanner/.
 
 
