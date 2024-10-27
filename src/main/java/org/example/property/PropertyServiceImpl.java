@@ -2,10 +2,10 @@ package org.example.property;
 
 import lombok.RequiredArgsConstructor;
 import org.example.property.model.PropertyType;
-import org.example.security.JwtService;
 import org.example.property.dto.*;
 import org.example.property.model.Property;
 import org.example.property.model.PropertyImage;
+import org.example.security.TokenExtractor;
 import org.example.user.UserRepository;
 import org.example.user.model.Role;
 import org.example.user.model.RoleEnum;
@@ -32,7 +32,9 @@ public class PropertyServiceImpl implements PropertyService {
     private final PropertyTypeRepository propertyTypeRepository;
 
     private final PropertyImageRepository propertyImageRepository;
-    private final JwtService jwtService;
+    
+    private final TokenExtractor tokenExtractor;
+
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
@@ -58,7 +60,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     @Cacheable(value = "property", key = "#propertyId")
     public PropertyImageDto getPropertyByOwner(Long propertyId, String token) {
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
@@ -84,7 +86,7 @@ public class PropertyServiceImpl implements PropertyService {
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public PropertyDto addPropertyByOwner(PropertySaveDto propertySaveDto, String token) {
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         PropertyType propertyType = propertyTypeRepository.findById(propertySaveDto.getPropertyTypeId()).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Type with id=%d was not found", propertySaveDto.getPropertyTypeId()),
                         "The required object was not found."));
@@ -94,9 +96,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
-    @CacheEvict(cacheNames = "property", allEntries = true)
+    @CacheEvict(cacheNames = "property", key = "#propertyId")
     public PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto, String token) {
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
@@ -114,9 +116,9 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
-    @CacheEvict(cacheNames = "property", allEntries = true)
+    @CacheEvict(cacheNames = "property", key = "#propertyId")
     public void deleteProperty(Long propertyId, String token) {
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
@@ -143,7 +145,7 @@ public class PropertyServiceImpl implements PropertyService {
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public List<PropertyDto> getOwnerProperties(String token) {
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         return propertyRepository.findByUserId(user.getId()).stream()
                 .map(x -> PropertyMapper.toPropertyDto(x))
                 .collect(Collectors.toList());
@@ -153,7 +155,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<PropertyImageDto> getOwnerPropertiesWithImages(String token, int from, int size) {
         PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         List<PropertyImageDto> properties = propertyRepository.findByUserId(user.getId(), page).stream()
                 .map(x -> PropertyMapper.toPropertyImageDto(x))
                 .collect(Collectors.toList());
@@ -191,11 +193,12 @@ public class PropertyServiceImpl implements PropertyService {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
+    @CacheEvict(cacheNames = "property", key = "#propertyId")
     public PropertyDto updatePropertyPaidTime(Long propertyId, PropertyPaidUpdateDto propertyPaidUpdateDto, String token) {
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         if (!user.getId().equals(property.getUser().getId())) {
             throw new PermissionViolationException(String.format("User with id=%d is not an owner", user.getId()),
                     "Object permissions were violated!.");
@@ -213,16 +216,8 @@ public class PropertyServiceImpl implements PropertyService {
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public Long countOwnerProperty(String token) {
-        User user = getUserFromToken(token);
+        User user = tokenExtractor.getUserFromToken(token);
         return propertyRepository.countByUserId(user.getId());
-    }
-
-    private User getUserFromToken(String token) {
-        String jwt = token.substring(7);
-        String userName = jwtService.extractUsername(jwt);
-        return userRepository.findByName(userName).orElseThrow(
-                () -> new EntityNotFoundException(String.format("User with name=%s was not found", userName),
-                        "The required object was not found."));
     }
 
     private void updatePropertyDtoWithImages(List<PropertyImageDto> properties) {

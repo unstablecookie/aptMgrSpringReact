@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const SignUp = props => {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const isNotLocked = true;
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const history = useNavigate();
@@ -24,6 +25,7 @@ const SignUp = props => {
             const response = await axios.post('/auth/signup', {
                 name,
                 password,
+                isNotLocked,
             });
             console.log(response.data);
             history('/');

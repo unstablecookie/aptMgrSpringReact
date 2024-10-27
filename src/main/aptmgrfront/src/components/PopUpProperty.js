@@ -20,10 +20,10 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
     };
 
     const [paidCheck , setPaidCheck] = useState(child.data.monthlyPaid);
-    const [property, setProperty] = useState({
-        lastPayment: child.data.lastPayment,
-        monthlyPaid: paidCheck,
-    });
+    // const [property, setProperty] = useState({
+    //     lastPayment: child.data.lastPayment,
+    //     monthlyPaid: paidCheck,
+    // });
 
     const [updateFullProperty, setUpdateFullProperty] = useState({
         title: child.data.title,
@@ -35,26 +35,26 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
     });
 
     const handlePaidSwich = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const URL = `/properties/owner/${child.data.id}/paid`;
         const updateProperty = {
             lastPayment: updateFullProperty.lastPayment,
-            monthlyPaid: true,
+            monthlyPaid: !paidCheck,
         }
         PatchServie.updateEntity(URL, updateProperty, config)
             .then(() => {
-                setProperty({
-                    lastPayment: updateProperty.lastPayment,
-                    monthlyPaid: updateProperty.monthlyPaid,
-                })
-                setPaidCheck(true);
+                // setProperty({
+                //     lastPayment: updateProperty.lastPayment,
+                //     monthlyPaid: updateProperty.monthlyPaid,
+                // })
+                setPaidCheck(!paidCheck);
             })
             .catch((error) => {
             console.log(error);
-            setProperty({
-                lastPayment: child.data.monthlyPaid,
-                monthlyPaid: paidCheck,
-            })
+            // setProperty({
+            //     lastPayment: child.data.monthlyPaid,
+            //     monthlyPaid: paidCheck,
+            // })
         });
     }
     const handleChange = (e) => {
@@ -121,7 +121,7 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
                         <div className='switch bottom-line-gap'>
                             <label className="switch">
                                 <input type="checkbox" checked={paidCheck} onChange={(e) => handlePaidSwich(e)}/>
-                                <span className="slider"></span>
+                                <span className="slider square"></span>
                             </label>
                         </div>
                     </div>
@@ -134,7 +134,7 @@ const PopUpProperty = ({ active, setActive, child, token}) => {
                     </div>
                 </div>
                 <div className='side-panel'>
-                    <RightRibbon child={child} token={token} popUpActive={setActive} propertyFull={updateFullProperty}/>
+                    <RightRibbon child={child} token={token} popUpActive={setActive} entity="properties" entityFull={updateFullProperty}/>
                 </div>
             </div>
         </div>

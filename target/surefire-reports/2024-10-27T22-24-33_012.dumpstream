@@ -1,4 +1,4 @@
-# Created at 2024-10-22T22:35:23.624
+# Created at 2024-10-27T22:24:33.519
 Boot Manifest-JAR contains absolute paths in classpath 'D:\Java\yandex\aptMgrReact\target\test-classes'
 Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
 'other' has different root

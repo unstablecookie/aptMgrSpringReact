@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.user.dto.RoleDto;
 import org.example.user.dto.UserDto;
 import org.example.user.dto.UserFormRoleDto;
+import org.example.user.dto.UserFullDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public UserDto getUser(@PathVariable Long userId) {
+    public UserFullDto getUser(@PathVariable Long userId) {
         logger.info(String.format("get user id=%d", userId));
         return userService.getUser(userId);
     }
@@ -39,9 +40,17 @@ public class UserController {
 
     @PatchMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUser(@PathVariable Long userId, @RequestBody UserDto userDto) {
+    public UserFullDto updateUser(@PathVariable Long userId, @RequestBody UserFullDto userFullDto) {
         logger.info(String.format("update user id=%d", userId));
-        return userService.updateUser(userId, userDto);
+        return userService.updateUser(userId, userFullDto);
+    }
+
+    @PatchMapping("/{userId}/lock/{isNotLocked}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserDto updateUserLock(@RequestHeader("authorization") String token, 
+                                  @PathVariable Long userId, @PathVariable String isNotLocked) {
+        logger.info(String.format("update user lock id=%d", userId));
+        return userService.updateUserLock(userId, Boolean.valueOf(isNotLocked), token);
     }
 
     @DeleteMapping("/{userId}")

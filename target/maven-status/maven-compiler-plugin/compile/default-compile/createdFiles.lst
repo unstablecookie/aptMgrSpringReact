@@ -1,5 +1,6 @@
 org\example\security\AuthenticationService.class
 org\example\user\dto\UserAuthDto.class
+org\example\user\dto\UserFullDto$UserFullDtoBuilder.class
 org\example\property\dto\PropertyTypeDto.class
 org\example\user\model\User$UserBuilder.class
 org\example\property\PropertyController.class
@@ -28,7 +29,9 @@ org\example\util\CustomRestExceptionHandler.class
 org\example\user\model\Role.class
 org\example\property\dto\PropertyDto$PropertyDtoBuilder.class
 org\example\property\dto\PropertySaveDto.class
+org\example\user\dto\UserFullDto.class
 org\example\user\dto\UserMapper.class
+org\example\security\TokenExtractor.class
 org\example\property\model\PropertyImage.class
 org\example\util\auth\LoginResponse$LoginResponseBuilder.class
 org\example\user\dto\RoleMapper.class

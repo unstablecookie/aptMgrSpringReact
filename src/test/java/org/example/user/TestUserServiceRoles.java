@@ -3,6 +3,7 @@ package org.example.user;
 import org.example.user.dto.RoleDto;
 import org.example.user.dto.UserDto;
 import org.example.user.dto.UserFormRoleDto;
+import org.example.user.dto.UserFullDto;
 import org.example.util.error.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,7 +44,7 @@ public class TestUserServiceRoles {
         //then
         assertThat(userService.getUser(userId))
                 .isNotNull()
-                .isInstanceOf(UserDto.class);
+                .isInstanceOf(UserFullDto.class);
     }
 
     @Test
@@ -98,13 +99,13 @@ public class TestUserServiceRoles {
         Long userId = 1L;
         String changedName = "changedName";
         //when
-        UserDto updateUser = UserDto.builder()
+        UserFullDto updateUser = UserFullDto.builder()
                 .name(changedName)
                 .build();
         //then
         assertThat(userService.updateUser(userId, updateUser))
                 .isNotNull()
-                .isInstanceOf(UserDto.class);
+                .isInstanceOf(UserFullDto.class);
     }
 
     @Test
@@ -114,7 +115,7 @@ public class TestUserServiceRoles {
         Long userId = 1L;
         String changedName = "changedName";
         //when
-        UserDto updateUser = UserDto.builder()
+        UserFullDto updateUser = UserFullDto.builder()
                 .name(changedName)
                 .build();
         //then

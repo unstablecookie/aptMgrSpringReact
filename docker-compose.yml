@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: 'aptmgr.0.2'
+    image: 'aptmgr.0.3'
     build:
       context: .
     container_name: aptmgr
@@ -10,8 +10,12 @@ services:
       - db
       - cache
     environment:
+      - SPRING_PROFILES_ACTIVE=prod
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/aptmgr
-
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=P@ssw0rd
+      - SPRING_DATA_REDIS_HOST=cache
+      - SPRING_DATA_REDIS_PORT=6379
     ports:
       - "8083:8083"
 
@@ -30,5 +34,5 @@ services:
     container_name: redis
     restart: always
     ports:
-      - "6379:6379"
+      - "6380:6379"
     command: redis-server --bind 0.0.0.0

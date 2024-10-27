@@ -10,6 +10,7 @@ const NewUser = props => {
         name: "",
         password: "",
         roleId: 1,
+        isNotLocked: true,
     });  
     const [msg, setMsg] = useState("");
     const config = {
@@ -32,6 +33,8 @@ const NewUser = props => {
                     name: "",
                     password: "",
                     roleId: 1,
+                    isNotLocked: true,
+
                 })
                 updateButton();
             }).catch((error) => {
@@ -81,6 +84,12 @@ const NewUser = props => {
                             getRoles.map((role,i) =>
                                 <option key={i} value={role.id}>{role.name}</option>
                             )};
+                        </select>
+                    </div>
+                    <div className="divborder">
+                        <select className='simple-input' name="isNotLocked" onChange={(e) => handleChange(e)} value={user.isNotLocked}>
+                            <option value={true}>ENABLED</option>
+                            <option value={false}>DISABLE</option>
                         </select>
                     </div>
                     <div className="divborder">
