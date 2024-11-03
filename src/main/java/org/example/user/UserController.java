@@ -20,9 +20,10 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping
-    public List<UserDto> getUsers() {
+    public List<UserDto> getUsers(@RequestParam(required = false, defaultValue = "0") int from, 
+                                  @RequestParam(required = false, defaultValue = "10") int size) {
         logger.info("get users");
-        return userService.getUsers();
+        return userService.getUsers(from, size);
     }
 
     @GetMapping("/{userId}")
@@ -64,5 +65,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<RoleDto> getRoles() {
         return userService.getRoles();
+    }
+
+    @GetMapping("/count")
+    @ResponseStatus(HttpStatus.OK)
+    public Long countUsers() {
+        logger.info("count properties");
+        return userService.countUsers();
     }
 }

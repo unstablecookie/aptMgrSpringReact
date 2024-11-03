@@ -12,10 +12,12 @@ import {
     HeaderCell,
     Cell,
   } from "@table-library/react-table-library/table";
+import { usePagination } from "@table-library/react-table-library/pagination";
 import '../../styles/util.css'
 import PopUpUser from '../PopUpUser';
 
 const LoadUsers = props => {
+    const LIMIT = 5;
     const chakraTheme = getTheme(DEFAULT_OPTIONS);
     const theme = useTheme(chakraTheme);
     const [getUsers, setGetUsers] = useState({nodes: [],});
@@ -24,6 +26,62 @@ const LoadUsers = props => {
     const config = {
       headers: { Authorization: `Bearer ${props.token}` }
     };
+    const [counter, setCounter] = useState(0);
+
+    const pagination = usePagination(
+      getUsers,
+      {
+        state: {
+          page: 0,
+          size: LIMIT,
+        },
+        onChange: onPaginationChange,
+      },
+      {
+        isServer: true,
+      }
+    );
+
+    function onPaginationChange(action, state) {
+      async function fetchPagedUsers(params) {
+        const URL = "/users";
+        const updateConfig = {
+          headers: { Authorization: `Bearer ${props.token}` },
+          params: {
+            from: (params * LIMIT),
+            size: LIMIT,
+          },
+        };
+        try {
+            const response = await axios.get(URL, updateConfig);
+            setGetUsers({
+              nodes: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+      }
+      fetchPagedUsers(action.payload.page);
+    }
+
+    useEffect(() => {
+      async function fetchCount(params) {
+        const URL = "/users/count";
+        try {
+          const response = await axios.get(URL, config);
+          var maxEntities;
+          if (response.data <= LIMIT) {
+            maxEntities = 1;
+          } else {
+            maxEntities = Number((response.data / LIMIT).toFixed())  + 1;
+          }
+          setCounter(maxEntities);
+          } catch (error) {
+          console.log(error);
+        }
+      }
+      fetchCount();
+    }, []);
 
     useEffect(() => {
         async function fetchUsers(params) {
@@ -74,7 +132,7 @@ const LoadUsers = props => {
                 <Body>
                   {tableList.map((user, i) => (
                     <Row key={i} item={user}>
-                      <Cell>{i}</Cell>
+                      <Cell>{user.id}</Cell>
                       <Cell>{user.name}</Cell>
                       <Cell onClick={() => loadUser({user})}><div className="plainborder">details</div></Cell>
                     </Row>
@@ -83,6 +141,32 @@ const LoadUsers = props => {
               </>
             )}
           </Table>
+            {true && (
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
+              >
+                <span>Total Pages: {counter}</span>
+
+                <span>
+                  Page:{" "}
+                  {Array(counter)
+                    .fill()
+                    .map((_, index) => (
+                      <button className='modern-nextpage'
+                        key={index}
+                        type="button"
+                        onClick={() => pagination.fns.onSetPage(index)}
+                      >
+                        {index + 1}
+                      </button>
+                    ))}
+                </span>
+              </div>
+
+            )}
           </Box>
         </div>
         <div >
