@@ -10,6 +10,10 @@ import java.util.List;
 public interface UserService {
     List<UserDto> getUsers();
 
+    List<UserDto> getUsers(int from, int size);
+
+    List<UserDto> searchForTheUsers(String name, int from, int size);
+
     UserDto addUser(UserFormRoleDto userFormDto);
 
     UserFullDto updateUser(Long userId, UserFullDto userFullDto);
@@ -19,6 +23,8 @@ public interface UserService {
     void deleteUser(Long userId);
 
     List<RoleDto> getRoles();
-    
+
     UserDto updateUserLock(Long userId, Boolean isNotLocked, String token);
+
+    Long countUsers();
 }

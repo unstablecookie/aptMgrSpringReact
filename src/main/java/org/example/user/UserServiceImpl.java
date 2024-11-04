@@ -6,11 +6,15 @@ import org.example.user.dto.*;
 import org.example.user.model.Role;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.UnexpectedRollbackException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +33,26 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll().stream()
                 .map(x -> UserMapper.toUserDto(x))
                 .collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Override
+    public List<UserDto> getUsers(int from, int size) {
+        PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
+        List<UserDto> users = userRepository.findAll(page).stream()
+                .map(x -> UserMapper.toUserDto(x))
+                .collect(Collectors.toList());
+        return users;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Override
+    public List<UserDto> searchForTheUsers(String name, int from, int size) {
+        PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
+        List<UserDto> users = userRepository.findByNameContainingIgnoreCase(name.toLowerCase(), page).stream()
+                .map(x -> UserMapper.toUserDto(x))
+                .collect(Collectors.toList());
+        return users;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
@@ -82,6 +106,11 @@ public class UserServiceImpl implements UserService {
                         "The required object was not found."));
         user.setIsNotLocked(isNotLocked);
         return UserMapper.toUserDto(userRepository.save(user));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public Long countUsers() {
+        return userRepository.count();
     }
 
     @Override

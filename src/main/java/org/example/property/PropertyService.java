@@ -1,12 +1,17 @@
 package org.example.property;
 
 import org.example.property.dto.*;
+import org.example.user.dto.UserDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface PropertyService {
     List<PropertyDto> getProperties();
+
+    List<PropertyImageDto> searchForTheProperty(String title, int from, int size);
+
+    List<PropertyImageDto> searchForThePropertyByOwner(String title, int from, int size, String token);
 
     PropertyDto addProperty(PropertySaveDto propertySaveDto);
 

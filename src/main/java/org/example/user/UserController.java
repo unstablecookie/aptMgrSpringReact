@@ -20,9 +20,18 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping
-    public List<UserDto> getUsers() {
-        logger.info("get users");
-        return userService.getUsers();
+    public List<UserDto> getUsers(@RequestParam(required = false, defaultValue = "0") int from, 
+                                  @RequestParam(required = false, defaultValue = "10") int size) {
+        logger.info("get users from " + from + " by size " + size);
+        return userService.getUsers(from, size);
+    }
+
+    @GetMapping("/search")
+    public List<UserDto> searchForTheUsers(@RequestParam String name,
+                                           @RequestParam(required = false, defaultValue = "0") int from,
+                                           @RequestParam(required = false, defaultValue = "10") int size) {
+        logger.info("search users by name: " + name);
+        return userService.searchForTheUsers(name, from, size);
     }
 
     @GetMapping("/{userId}")
@@ -64,5 +73,12 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     public List<RoleDto> getRoles() {
         return userService.getRoles();
+    }
+
+    @GetMapping("/count")
+    @ResponseStatus(HttpStatus.OK)
+    public Long countUsers() {
+        logger.info("count users");
+        return userService.countUsers();
     }
 }
