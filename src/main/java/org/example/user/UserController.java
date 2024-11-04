@@ -22,8 +22,16 @@ public class UserController {
     @GetMapping
     public List<UserDto> getUsers(@RequestParam(required = false, defaultValue = "0") int from, 
                                   @RequestParam(required = false, defaultValue = "10") int size) {
-        logger.info("get users");
+        logger.info("get users from " + from + " by size " + size);
         return userService.getUsers(from, size);
+    }
+
+    @GetMapping("/search")
+    public List<UserDto> searchForTheUsers(@RequestParam String name,
+                                           @RequestParam(required = false, defaultValue = "0") int from,
+                                           @RequestParam(required = false, defaultValue = "10") int size) {
+        logger.info("search users by name: " + name);
+        return userService.searchForTheUsers(name, from, size);
     }
 
     @GetMapping("/{userId}")
@@ -70,7 +78,7 @@ public class UserController {
     @GetMapping("/count")
     @ResponseStatus(HttpStatus.OK)
     public Long countUsers() {
-        logger.info("count properties");
+        logger.info("count users");
         return userService.countUsers();
     }
 }

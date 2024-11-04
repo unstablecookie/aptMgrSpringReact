@@ -6,7 +6,6 @@ import org.example.property.dto.*;
 import org.example.property.model.Property;
 import org.example.property.model.PropertyImage;
 import org.example.security.TokenExtractor;
-import org.example.user.UserRepository;
 import org.example.user.model.Role;
 import org.example.user.model.RoleEnum;
 import org.example.user.model.User;
@@ -28,13 +27,11 @@ import java.util.stream.Collectors;
 public class PropertyServiceImpl implements PropertyService {
     private final PropertyRepository propertyRepository;
     private final PropertyRepositoryPageAndSort propertyRepositoryPageAndSort;
-    private final UserRepository userRepository;
     private final PropertyTypeRepository propertyTypeRepository;
 
     private final PropertyImageRepository propertyImageRepository;
-    
-    private final TokenExtractor tokenExtractor;
 
+    private final TokenExtractor tokenExtractor;
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
@@ -42,6 +39,30 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyRepository.findAll().stream()
                 .map(x -> PropertyMapper.toPropertyDto(x))
                 .collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @Override
+    public List<PropertyImageDto> searchForTheProperty(String title, int from, int size) {
+        PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
+        List<PropertyImageDto> properties = propertyRepository.findByTitleContainingIgnoreCase(title.toLowerCase(), page).stream()
+                .map(x -> PropertyMapper.toPropertyImageDto(x))
+                .collect(Collectors.toList());
+        updatePropertyDtoWithImages(properties);
+        return properties;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @Override
+    public List<PropertyImageDto> searchForThePropertyByOwner(String title, int from, int size, String token) {
+        User user = tokenExtractor.getUserFromToken(token);
+        PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
+        List<PropertyImageDto> properties = 
+                propertyRepository.findByUserIdAndTitleContainingIgnoreCase(user.getId(), title.toLowerCase(), page).stream()
+                .map(x -> PropertyMapper.toPropertyImageDto(x))
+                .collect(Collectors.toList());
+        updatePropertyDtoWithImages(properties);
+        return properties;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")

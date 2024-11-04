@@ -2,6 +2,7 @@ package org.example.property;
 
 import lombok.RequiredArgsConstructor;
 import org.example.property.dto.*;
+import org.example.user.dto.UserDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
@@ -23,6 +24,23 @@ public class PropertyController {
                                                 @RequestParam(required = false, defaultValue = "10") int size) {
         logger.info("get properties from " + from + " by size " + size);
         return propertyService.getPropertiesWithImages(from, size);
+    }
+
+    @GetMapping("/search")
+    public List<PropertyImageDto> searchForTheProperty(@RequestParam String title,
+                                           @RequestParam(required = false, defaultValue = "0") int from,
+                                           @RequestParam(required = false, defaultValue = "10") int size) {
+        logger.info("search property by title: " + title);
+        return propertyService.searchForTheProperty(title, from, size);
+    }
+
+    @GetMapping("/search/owner")
+    public List<PropertyImageDto> searchForThePropertyByOwner(@RequestParam String title,
+                                                       @RequestParam(required = false, defaultValue = "0") int from,
+                                                       @RequestParam(required = false, defaultValue = "10") int size,
+                                                       @RequestHeader("authorization") String token) {
+        logger.info("search property by title and owner: " + title);
+        return propertyService.searchForThePropertyByOwner(title, from, size, token);
     }
 
     @GetMapping("/{propertyId}")

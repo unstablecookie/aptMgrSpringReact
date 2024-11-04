@@ -24,7 +24,11 @@ const LoadUsers = props => {
     const [popUpActive, setPopUpActive] = useState(false);
     const [getUser, setGetUser] = useState({});
     const config = {
-      headers: { Authorization: `Bearer ${props.token}` }
+      headers: { Authorization: `Bearer ${props.token}` },
+      params: {
+        from: 0,
+        size: LIMIT,
+      },
     };
     const [counter, setCounter] = useState(0);
 
@@ -41,6 +45,31 @@ const LoadUsers = props => {
         isServer: true,
       }
     );
+    const [search, setSearch] = useState("");
+
+    const handleSearch = (e) => {
+      setSearch(e.target.value);
+      async function fetchPagedUsersSearch(params) {
+        const URL = "/users/search";
+        const updateConfig = {
+          headers: { Authorization: `Bearer ${props.token}` },
+          params: {
+            name: params,
+            from: 0,
+            size: LIMIT,
+          },
+        };
+        try {
+            const response = await axios.get(URL, updateConfig);
+            setGetUsers({
+              nodes: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+      }
+      fetchPagedUsersSearch(e.target.value);
+    };
 
     function onPaginationChange(action, state) {
       async function fetchPagedUsers(params) {
@@ -61,7 +90,30 @@ const LoadUsers = props => {
             console.log(error);
         }
       }
-      fetchPagedUsers(action.payload.page);
+      async function fetchPagedUsersSearch(params) {
+        const URL = "/users/search";
+        const updateConfig = {
+          headers: { Authorization: `Bearer ${props.token}` },
+          params: {
+            name: search,
+            from: (params * LIMIT),
+            size: LIMIT,
+          },
+        };
+        try {
+            const response = await axios.get(URL, updateConfig);
+            setGetUsers({
+              nodes: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+      }
+      if (search == "") {
+        fetchPagedUsers(action.payload.page);
+      } else {
+        fetchPagedUsersSearch(action.payload.page);
+      }
     }
 
     useEffect(() => {
@@ -113,13 +165,17 @@ const LoadUsers = props => {
       fetchUser(e);
     }
 
-    // if (!getUsers.nodes.length) return <h3>loading..</h3>;
-
     return (
       <div>
         <div className='table-header'>
+          {/* htmlFor="search" */}
+            <label >
+                    Search by Name:
+                    <input className='simple-input' id="search" type="text" value={search} onChange={handleSearch}/>
+            </label>
           <Box p={3} borderWidth="1px" borderRadius="lg">
-            <Table data={getUsers} theme={theme}>
+            <Table data={getUsers} pagination={pagination} 
+              theme={theme}>
             {(tableList) => (
               <>
                 <Header>
@@ -129,6 +185,7 @@ const LoadUsers = props => {
                     <HeaderCell>view</HeaderCell>
                   </HeaderRow>
                 </Header>
+
                 <Body>
                   {tableList.map((user, i) => (
                     <Row key={i} item={user}>

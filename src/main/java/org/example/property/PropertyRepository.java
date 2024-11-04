@@ -12,4 +12,8 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     Long countByUserId(Long userId);
 
     Page<Property> findByUserId(Long userId, Pageable page);
+
+    Page<Property> findByTitleContainingIgnoreCase(String title, Pageable page);
+
+    Page<Property> findByUserIdAndTitleContainingIgnoreCase(Long userId, String title, Pageable page);
 }

@@ -48,6 +48,31 @@ const LoadProperties = props => {
         isServer: true,
       }
     );
+    const [search, setSearch] = useState("");
+
+    const handleSearch = (e) => {
+      setSearch(e.target.value);
+      async function fetchPagedPropertiesSearch(params) {
+        const URL = "/properties/search";
+        const updateConfig = {
+          headers: { Authorization: `Bearer ${props.token}` },
+          params: {
+            title: params,
+            from: 0,
+            size: LIMIT,
+          },
+        };
+        try {
+            const response = await axios.get(URL, updateConfig);
+            setGetProperties({
+              nodes: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+      }
+      fetchPagedPropertiesSearch(e.target.value);
+    };
 
     function onPaginationChange(action, state) {
       async function fetchPagedProperties(params) {
@@ -68,7 +93,30 @@ const LoadProperties = props => {
             console.log(error);
         }
       }
-      fetchPagedProperties(action.payload.page);
+      async function fetchPagedPropertiesSearch(params) {
+        const URL = "/properties/search";
+        const updateConfig = {
+          headers: { Authorization: `Bearer ${props.token}` },
+          params: {
+            title: search,
+            from: (params * LIMIT),
+            size: LIMIT,
+          },
+        };
+        try {
+            const response = await axios.get(URL, updateConfig);
+            setGetProperties({
+              nodes: response.data,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+      }
+      if (search == "") {
+        fetchPagedProperties(action.payload.page);
+      } else {
+        fetchPagedPropertiesSearch(action.payload.page);
+      }
     }
 
     useEffect(() => {
@@ -127,11 +175,13 @@ const LoadProperties = props => {
         }
     };
 
-    // if (!getProperties.nodes.length) return <h3>loading..</h3>;
-
     return (
       <div>
         <div className='table-header'>
+          <label >
+                  Search by Title:
+                  <input className='simple-input' id="search" type="text" value={search} onChange={handleSearch}/>
+          </label>
         <Box p={3} borderWidth="1px" borderRadius="lg">
           <Table data={getProperties} pagination={pagination} 
             theme={theme}
@@ -174,7 +224,6 @@ const LoadProperties = props => {
               }}
             >
               <span>Total Pages: {counter}</span>
-
               <span>
                 Page:{" "}
                 {Array(counter)
@@ -190,9 +239,7 @@ const LoadProperties = props => {
                   ))}
               </span>
             </div>
-
           )}
-
         </Box>
         </div>
         <div >

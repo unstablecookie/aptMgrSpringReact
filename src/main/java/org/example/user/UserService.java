@@ -12,6 +12,8 @@ public interface UserService {
 
     List<UserDto> getUsers(int from, int size);
 
+    List<UserDto> searchForTheUsers(String name, int from, int size);
+
     UserDto addUser(UserFormRoleDto userFormDto);
 
     UserFullDto updateUser(Long userId, UserFullDto userFullDto);

@@ -9,6 +9,10 @@ import java.util.List;
 public interface PropertyService {
     List<PropertyDto> getProperties();
 
+    List<PropertyImageDto> searchForTheProperty(String title, int from, int size);
+
+    List<PropertyImageDto> searchForThePropertyByOwner(String title, int from, int size, String token);
+
     PropertyDto addProperty(PropertySaveDto propertySaveDto);
 
     PropertyDto updateProperty(Long propertyId, PropertySaveDto propertySaveDto, String token);
