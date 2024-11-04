@@ -19,9 +19,9 @@ This is a web application to manage property.
  - Users can be locked out.
  - API is Role-based protected. (ADMIN, USER - default roles).
  - Add\view properties.
+ - search
 
 *Upcoming features:*
- - Finish CRUD.
  - Validation.
  - Tests.
  - More tests(postman).
