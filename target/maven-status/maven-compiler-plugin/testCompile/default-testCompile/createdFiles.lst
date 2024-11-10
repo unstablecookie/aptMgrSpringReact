@@ -1,3 +1,4 @@
-org\example\user\TestUserController.class
-org\example\user\TestUserServiceRoles.class
-org\example\controller\TestAuthController.class
+org\example\user\UserControllerTest.class
+org\example\controller\AuthControllerTest.class
+org\example\user\UserServiceRolesTest.class
+org\example\property\PropertyControllerTest.class
