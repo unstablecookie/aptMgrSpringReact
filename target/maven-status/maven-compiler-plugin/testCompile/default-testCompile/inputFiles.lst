@@ -1,3 +1,4 @@
-D:\Java\yandex\aptMgrReact\src\test\java\org\example\controller\TestAuthController.java
-D:\Java\yandex\aptMgrReact\src\test\java\org\example\user\TestUserController.java
-D:\Java\yandex\aptMgrReact\src\test\java\org\example\user\TestUserServiceRoles.java
+D:\DEV\Java\aptMgrSpringReact\src\test\java\org\example\controller\AuthControllerTest.java
+D:\DEV\Java\aptMgrSpringReact\src\test\java\org\example\property\PropertyControllerTest.java
+D:\DEV\Java\aptMgrSpringReact\src\test\java\org\example\user\UserControllerTest.java
+D:\DEV\Java\aptMgrSpringReact\src\test\java\org\example\user\UserServiceRolesTest.java
