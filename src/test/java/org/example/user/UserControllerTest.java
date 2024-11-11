@@ -3,6 +3,7 @@ package org.example.user;
 import lombok.RequiredArgsConstructor;
 import org.example.security.JwtService;
 import org.example.user.dto.UserDto;
+import org.example.user.dto.UserFormRoleDto;
 import org.example.user.dto.UserFullDto;
 import org.example.user.dto.UserMapper;
 import org.example.user.model.Role;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.when;
@@ -47,6 +49,10 @@ public class UserControllerTest {
 
     @Autowired
     private MockMvc mvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private String role = "ADMIN";
     private User user;
     private int from = 0;
@@ -146,5 +152,67 @@ public class UserControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id", is(1)))
                 .andExpect(jsonPath("$[0].name", is(user.getName())));
+    }
+
+    @Test
+    public void searchForTheUsers_success_nothingFound() throws Exception {
+        //given
+        String userName = "";
+        //when
+        when(userService.searchForTheUsers(userName, from, size)).thenReturn(List.of());
+        //then
+        mvc.perform(get("/users/search?name=" + userName + "&from=0&size=5")
+                        .characterEncoding(StandardCharsets.UTF_8)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void addUser_success() throws Exception {
+        //given
+        Long roleId = 1L;
+        String isNotLocked = "true";
+        UserFormRoleDto userFormRoleDto = UserFormRoleDto.builder()
+                .name(user.getName())
+                .password(user.getPassword())
+                .roleId(roleId)
+                .isNotLocked(isNotLocked)
+                .build();
+        //when
+        when(userService.addUser(userFormRoleDto)).thenReturn(UserMapper.toUserDto(user));
+        //then
+        mvc.perform(post("/users")
+                        .content(objectMapper.writeValueAsString(userFormRoleDto))
+                        .characterEncoding(StandardCharsets.UTF_8)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.name", is(user.getName())));
+    }
+    
+    @Test
+    public void addUser_failure_nameIsNotUnique() throws Exception {
+//        //given
+//        Long roleId = 1L;
+//        String isNotLocked = "true";
+//        UserFormRoleDto userFormRoleDto = UserFormRoleDto.builder()
+//                .name(user.getName())
+//                .password(user.getPassword())
+//                .roleId(roleId)
+//                .isNotLocked(isNotLocked)
+//                .build();
+//        //when
+//        when(userService.addUser(userFormRoleDto)).thenReturn(UserMapper.toUserDto(user));
+//        //then
+//        mvc.perform(post("/users")
+//                        .content(objectMapper.writeValueAsString(userFormRoleDto))
+//                        .characterEncoding(StandardCharsets.UTF_8)
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .accept(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isCreated())
+//                .andExpect(jsonPath("$.id", is(1)))
+//                .andExpect(jsonPath("$.name", is(user.getName())));
     }
 }
