@@ -40,10 +40,12 @@ org\example\ApplicationEntry.class
 org\example\user\dto\UserDto$UserDtoBuilder.class
 org\example\user\UserServiceImpl.class
 org\example\property\model\PropertyType.class
+org\example\aspect\LogAfterExecution.class
 org\example\security\config\SecurityConfiguration.class
 org\example\user\dto\UserAuthDto$UserAuthDtoBuilder.class
 org\example\controller\IndexController.class
 org\example\user\dto\RoleDto$RoleDtoBuilder.class
+org\example\aspect\LoggingAspect.class
 org\example\user\dto\RoleDto.class
 org\example\util\error\EntityNotFoundException.class
 org\example\user\dto\UserDto.class

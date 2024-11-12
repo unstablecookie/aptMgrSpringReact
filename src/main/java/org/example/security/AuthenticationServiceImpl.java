@@ -1,6 +1,7 @@
 package org.example.security;
 
 import lombok.AllArgsConstructor;
+import org.example.aspect.LogAfterExecution;
 import org.example.user.RoleRepository;
 import org.example.user.UserRepository;
 import org.example.user.dto.UserAuthDto;
@@ -27,6 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
+    @LogAfterExecution
     public UserDto signup(UserAuthDto userAuthDto) {
         Role role = roleRepository.findById(1L).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Role with id=%d was not found", 1L),
@@ -36,6 +38,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         return UserMapper.toUserDto(userRepository.save(user));
     }
 
+    @LogAfterExecution
     public LoginResponse authenticate(UserAuthDto userAuthDto) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userAuthDto.getName(),
                 userAuthDto.getPassword()));

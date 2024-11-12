@@ -1,6 +1,7 @@
 package org.example.user;
 
 import lombok.RequiredArgsConstructor;
+import org.example.aspect.TimeTracker;
 import org.example.security.TokenExtractor;
 import org.example.user.dto.*;
 import org.example.user.model.Role;
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @TimeTracker
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<UserDto> getUsers(int from, int size) {

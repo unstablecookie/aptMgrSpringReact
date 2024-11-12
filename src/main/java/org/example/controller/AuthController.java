@@ -1,6 +1,8 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.example.aspect.LogAfterExecution;
+import org.example.aspect.LogBeforeExecution;
 import org.example.security.AuthenticationService;
 import org.example.user.dto.*;
 import org.example.util.auth.LoginResponse;
@@ -16,6 +18,7 @@ public class AuthController {
     private final AuthenticationService authenticationService;
     Logger logger = LoggerFactory.getLogger(AuthController.class);
 
+    @LogAfterExecution
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.OK)
     public UserDto register(@RequestBody UserAuthDto userAuthDto) {
@@ -24,6 +27,7 @@ public class AuthController {
         return registeredUser;
     }
 
+    @LogAfterExecution
     @PostMapping("/signin")
     @ResponseStatus(HttpStatus.OK)
     public LoginResponse authenticate(@RequestBody UserAuthDto userAuthDto) {
