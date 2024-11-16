@@ -1,7 +1,6 @@
 package org.example.property;
 
 import org.example.property.dto.*;
-import org.example.user.dto.UserDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

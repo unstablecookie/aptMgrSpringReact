@@ -1,6 +1,8 @@
 package org.example.property;
 
 import lombok.RequiredArgsConstructor;
+import org.example.aspect.LogAfterThrow;
+import org.example.aspect.LogTimeTracker;
 import org.example.property.model.PropertyType;
 import org.example.property.dto.*;
 import org.example.property.model.Property;
@@ -28,11 +30,11 @@ public class PropertyServiceImpl implements PropertyService {
     private final PropertyRepository propertyRepository;
     private final PropertyRepositoryPageAndSort propertyRepositoryPageAndSort;
     private final PropertyTypeRepository propertyTypeRepository;
-
     private final PropertyImageRepository propertyImageRepository;
-
     private final TokenExtractor tokenExtractor;
 
+    @LogAfterThrow
+    @LogTimeTracker
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<PropertyDto> getProperties() {
@@ -41,6 +43,7 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<PropertyImageDto> searchForTheProperty(String title, int from, int size) {
@@ -52,12 +55,13 @@ public class PropertyServiceImpl implements PropertyService {
         return properties;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public List<PropertyImageDto> searchForThePropertyByOwner(String title, int from, int size, String token) {
         User user = tokenExtractor.getUserFromToken(token);
         PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
-        List<PropertyImageDto> properties = 
+        List<PropertyImageDto> properties =
                 propertyRepository.findByUserIdAndTitleContainingIgnoreCase(user.getId(), title.toLowerCase(), page).stream()
                 .map(x -> PropertyMapper.toPropertyImageDto(x))
                 .collect(Collectors.toList());
@@ -65,6 +69,7 @@ public class PropertyServiceImpl implements PropertyService {
         return properties;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     @Cacheable(value = "property", key = "#propertyId")
@@ -77,6 +82,7 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyImageDto;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     @Cacheable(value = "property", key = "#propertyId")
@@ -94,6 +100,7 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyImageDto;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public PropertyDto addProperty(PropertySaveDto propertySaveDto) {
@@ -104,6 +111,7 @@ public class PropertyServiceImpl implements PropertyService {
         return PropertyMapper.toPropertyDto(propertyRepository.save(property));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public PropertyDto addPropertyByOwner(PropertySaveDto propertySaveDto, String token) {
@@ -115,6 +123,7 @@ public class PropertyServiceImpl implements PropertyService {
         return PropertyMapper.toPropertyDto(propertyRepository.save(property));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     @CacheEvict(cacheNames = "property", key = "#propertyId")
@@ -135,6 +144,7 @@ public class PropertyServiceImpl implements PropertyService {
         return PropertyMapper.toPropertyDto(propertyRepository.save(property));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     @CacheEvict(cacheNames = "property", key = "#propertyId")
@@ -156,6 +166,7 @@ public class PropertyServiceImpl implements PropertyService {
         propertyRepository.delete(property);
     }
 
+    @LogAfterThrow
     @Override
     public List<PropertyTypeDto> getPropertyTypes() {
         return propertyTypeRepository.findAll().stream()
@@ -163,6 +174,7 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public List<PropertyDto> getOwnerProperties(String token) {
@@ -172,6 +184,8 @@ public class PropertyServiceImpl implements PropertyService {
                 .collect(Collectors.toList());
     }
 
+    @LogAfterThrow
+    @LogTimeTracker
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public List<PropertyImageDto> getOwnerPropertiesWithImages(String token, int from, int size) {
@@ -184,6 +198,7 @@ public class PropertyServiceImpl implements PropertyService {
         return properties;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public void addPropertyImage(MultipartFile multipartFile, Long propertyId, String token) {
@@ -201,6 +216,8 @@ public class PropertyServiceImpl implements PropertyService {
         }
     }
 
+    @LogAfterThrow
+    @LogTimeTracker
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<PropertyImageDto> getPropertiesWithImages(int from, int size) {
@@ -212,6 +229,7 @@ public class PropertyServiceImpl implements PropertyService {
         return properties;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     @CacheEvict(cacheNames = "property", key = "#propertyId")
@@ -228,12 +246,14 @@ public class PropertyServiceImpl implements PropertyService {
         return PropertyMapper.toPropertyDto(propertyRepository.save(updatedProperty));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public Long countProperty() {
         return propertyRepository.count();
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @Override
     public Long countOwnerProperty(String token) {

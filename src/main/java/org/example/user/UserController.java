@@ -1,12 +1,11 @@
 package org.example.user;
 
 import lombok.RequiredArgsConstructor;
+import org.example.aspect.*;
 import org.example.user.dto.RoleDto;
 import org.example.user.dto.UserDto;
 import org.example.user.dto.UserFormRoleDto;
 import org.example.user.dto.UserFullDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,68 +16,79 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    @LogBeforeExecution
+    @LogAfterReturningList
     @GetMapping
-    public List<UserDto> getUsers(@RequestParam(required = false, defaultValue = "0") int from, 
+    @ResponseStatus(HttpStatus.OK)
+    public List<UserDto> getUsers(@RequestParam(required = false, defaultValue = "0") int from,
                                   @RequestParam(required = false, defaultValue = "10") int size) {
-        logger.info("get users from " + from + " by size " + size);
         return userService.getUsers(from, size);
     }
 
+    @LogBeforeExecution
+    @LogAfterReturningList
     @GetMapping("/search")
+    @ResponseStatus(HttpStatus.OK)
     public List<UserDto> searchForTheUsers(@RequestParam String name,
                                            @RequestParam(required = false, defaultValue = "0") int from,
                                            @RequestParam(required = false, defaultValue = "10") int size) {
-        logger.info("search users by name: " + name);
         return userService.searchForTheUsers(name, from, size);
     }
 
+    @LogBeforeExecution
+    @LogAfterReturningSingleObject
     @GetMapping("/{userId}")
+    @ResponseStatus(HttpStatus.OK)
     public UserFullDto getUser(@PathVariable Long userId) {
-        logger.info(String.format("get user id=%d", userId));
         return userService.getUser(userId);
     }
 
+    @LogBeforeExecutionNoPasswd
+    @LogAfterReturningSingleObject
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto addUser(@RequestBody UserFormRoleDto userFormRoleDto) {
-        logger.info(String.format("add user name=%s", userFormRoleDto.getName()));
         return userService.addUser(userFormRoleDto);
     }
 
+    @LogBeforeExecution
+    @LogAfterReturningSingleObject
     @PatchMapping("/{userId}")
     @ResponseStatus(HttpStatus.OK)
     public UserFullDto updateUser(@PathVariable Long userId, @RequestBody UserFullDto userFullDto) {
-        logger.info(String.format("update user id=%d", userId));
         return userService.updateUser(userId, userFullDto);
     }
 
+    @LogBeforeExecution
+    @LogAfterReturningSingleObject
     @PatchMapping("/{userId}/lock/{isNotLocked}")
     @ResponseStatus(HttpStatus.OK)
-    public UserDto updateUserLock(@RequestHeader("authorization") String token, 
+    public UserDto updateUserLock(@RequestHeader("authorization") String token,
                                   @PathVariable Long userId, @PathVariable String isNotLocked) {
-        logger.info(String.format("update user lock id=%d", userId));
         return userService.updateUserLock(userId, Boolean.valueOf(isNotLocked), token);
     }
 
+    @LogBeforeExecution
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable Long userId) {
-        logger.info(String.format("delete user id=%d", userId));
         userService.deleteUser(userId);
     }
 
+    @LogBeforeExecutionNoArgs
+    @LogAfterReturningList
     @GetMapping("/roles")
     @ResponseStatus(HttpStatus.OK)
     public List<RoleDto> getRoles() {
         return userService.getRoles();
     }
 
+    @LogBeforeExecutionNoArgs
+    @LogAfterReturningSingleObject
     @GetMapping("/count")
     @ResponseStatus(HttpStatus.OK)
     public Long countUsers() {
-        logger.info("count users");
         return userService.countUsers();
     }
 }

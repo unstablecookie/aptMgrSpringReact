@@ -1,20 +1,18 @@
 package org.example.user;
 
 import lombok.RequiredArgsConstructor;
-import org.example.security.TokenExtractor;
+import org.example.aspect.LogAfterThrow;
+import org.example.aspect.LogTimeTracker;
 import org.example.user.dto.*;
 import org.example.user.model.Role;
 import org.example.user.model.User;
 import org.example.util.error.EntityNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.UnexpectedRollbackException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,8 +23,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final TokenExtractor tokenExtractor;
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<UserDto> getUsers() {
@@ -35,6 +33,8 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @LogAfterThrow
+    @LogTimeTracker
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<UserDto> getUsers(int from, int size) {
@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public List<UserDto> searchForTheUsers(String name, int from, int size) {
@@ -55,6 +56,7 @@ public class UserServiceImpl implements UserService {
         return users;
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     @Cacheable(value = "user", key = "#userId")
@@ -65,6 +67,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserFullDto(user);
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     public UserDto addUser(UserFormRoleDto userFormDto) {
@@ -75,6 +78,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserDto(userRepository.save(user));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     @CacheEvict(value = "user", key = "#userId")
@@ -87,6 +91,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserFullDto(userRepository.save(user));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     @CacheEvict(value = "user", key = "#userId")
@@ -97,6 +102,7 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     @Override
     @CacheEvict(value = "user", key = "#userId")
@@ -108,6 +114,7 @@ public class UserServiceImpl implements UserService {
         return UserMapper.toUserDto(userRepository.save(user));
     }
 
+    @LogAfterThrow
     @PreAuthorize("hasAnyRole('ADMIN')")
     public Long countUsers() {
         return userRepository.count();

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.example.user.UserServiceRolesTest
 -------------------------------------------------------------------------------
-Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.018 s -- in org.example.user.UserServiceRolesTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.055 s -- in org.example.user.UserServiceRolesTest
