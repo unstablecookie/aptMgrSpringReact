@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.user.model.User;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data

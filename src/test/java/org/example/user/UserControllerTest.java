@@ -24,6 +24,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.nio.charset.StandardCharsets;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
@@ -135,7 +137,7 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.status", is("NOT_FOUND")))
                 .andExpect(jsonPath("$.reason", is("The required object was not found.")))
                 .andExpect(jsonPath("$.message", is(String.format("User with id=%d was not found", userId))))
-                .andExpect(jsonPath("$.timestamp", startsWith(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString())));
+                .andExpect(jsonPath("$.timestamp", startsWith(LocalDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("dd-MM-yyyy")).toString())));
     }
 
     @Test

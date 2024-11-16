@@ -1,6 +1,15 @@
 D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\ApplicationEntry.java
 D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogAfterExecution.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogAfterReturningList.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogAfterReturningSingleObject.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogAfterReturningSingleObjectNoData.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogAfterThrow.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogBeforeExecution.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogBeforeExecutionNoArgs.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogBeforeExecutionNoPasswd.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogBeforeExecutionNoToken.java
 D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LoggingAspect.java
+D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\aspect\LogTimeTracker.java
 D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\controller\AuthController.java
 D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\controller\CustomErrorController.java
 D:\Java\yandex\aptMgrSpringReact\src\main\java\org\example\controller\IndexController.java
