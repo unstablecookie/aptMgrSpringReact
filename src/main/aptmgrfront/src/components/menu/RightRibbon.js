@@ -1,14 +1,18 @@
+import React, { useEffect, useState }  from 'react';
 import '../../styles/darkribbon.css'
 import '../PopUp.css'
 import DeleteButton from './DeleteButton'
 import DeleteService from '../DeleteService';
 import UpdateButton from './UpdateButton';
+import PlanButton from './PlanButton';
 import PatchServie from '../PatchServie';
+import ListOfDynamicTiles from '../interactive/ListOfDynamicTiles';
 
-const RightRibbon = ({child, token, popUpActive, entityFull, entity}) => {
+const RightRibbon = ({child, token, popUpActive, isPlanActive, entityFull, entity}) => {
     const config = {
         headers: { Authorization: `Bearer ${token}` }
     };
+
     const onClickDelete = (e) => {
         e.preventDefault();
         const URL = `/${entity}/${child.data.id}`;
@@ -28,6 +32,11 @@ const RightRibbon = ({child, token, popUpActive, entityFull, entity}) => {
         });
     }
 
+    const onClickActive = (e) => {
+        isPlanActive(true);
+        popUpActive(false);
+    }
+
     return (
         <div className="example-wrapper-right">
             <div onClick={onClickDelete}>
@@ -35,6 +44,9 @@ const RightRibbon = ({child, token, popUpActive, entityFull, entity}) => {
             </div>
             <div onClick={onClickUpdate}>
                 <UpdateButton/>
+            </div>
+            <div onClick={onClickActive}>
+                <PlanButton/>
             </div>
         </div>
     );

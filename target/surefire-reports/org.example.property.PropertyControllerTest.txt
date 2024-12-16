@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: org.example.property.PropertyControllerTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.967 s -- in org.example.property.PropertyControllerTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.687 s -- in org.example.property.PropertyControllerTest
