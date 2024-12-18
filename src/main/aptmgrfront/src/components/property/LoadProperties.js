@@ -18,6 +18,7 @@ import '../../styles/util.css';
 import '../menu/button-next-page.css';
 import HomeIcon from '../../styles/images/home_icon.png';
 import PopUpProperty from '../PopUpProperty';
+import ListOfDynamicTiles from '../interactive/ListOfDynamicTiles';
 
 const LoadProperties = props => {
     const LIMIT = 5;
@@ -49,7 +50,7 @@ const LoadProperties = props => {
       }
     );
     const [search, setSearch] = useState("");
-
+    const [planActive, setPlanActive] = useState(false);
     const handleSearch = (e) => {
       setSearch(e.target.value);
       async function fetchPagedPropertiesSearch(params) {
@@ -243,7 +244,10 @@ const LoadProperties = props => {
         </Box>
         </div>
         <div >
-        { popUpActive ? <PopUpProperty active={popUpActive} setActive={setPopUpActive} child={getProperty} token={props.token}/> : null }
+          { popUpActive ? <PopUpProperty active={popUpActive} setActive={setPopUpActive} isPlanActive={setPlanActive} child={getProperty} token={props.token}/> : null }
+        </div>
+        <div>
+          { planActive ? <ListOfDynamicTiles active={planActive} isPlanActive={setPlanActive}/> : null }
         </div>
       </div>
     );

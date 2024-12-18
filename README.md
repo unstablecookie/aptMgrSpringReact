@@ -20,12 +20,12 @@ This is a web application to manage property.
  - API is Role-based protected. (ADMIN, USER - default roles).
  - Add\view properties.
  - search
+ - house planner (plan your house and save as a picture) . ( https://unstablecookie.github.io/basichouseplanner/ )
 
 *Upcoming features:*
  - Validation.
  - Tests.
  - More tests(postman).
- - Ability to plan and save property plan with https://unstablecookie.github.io/basichouseplanner/.
 
 
 Docker-ready compiled archieve is available in *releases*.
@@ -55,3 +55,5 @@ ERD:
 Some other pics:
 ![](/pics/1.JPG)
 ![](/pics/2.JPG)
+![](/pics/4.JPG)
+![](/pics/5.JPG)
