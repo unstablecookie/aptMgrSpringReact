@@ -6,7 +6,6 @@ import DeleteService from '../DeleteService';
 import UpdateButton from './UpdateButton';
 import PlanButton from './PlanButton';
 import PatchServie from '../PatchServie';
-import ListOfDynamicTiles from '../interactive/ListOfDynamicTiles';
 
 const RightRibbon = ({child, token, popUpActive, isPlanActive, entityFull, entity}) => {
     const config = {
@@ -45,9 +44,11 @@ const RightRibbon = ({child, token, popUpActive, isPlanActive, entityFull, entit
             <div onClick={onClickUpdate}>
                 <UpdateButton/>
             </div>
-            <div onClick={onClickActive}>
-                <PlanButton/>
-            </div>
+            { entity == "properties" ?             
+                <div onClick={onClickActive}>
+                    <PlanButton/>
+                </div> : null 
+            }
         </div>
     );
 };

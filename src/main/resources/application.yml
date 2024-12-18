@@ -27,7 +27,7 @@ spring:
       mode: always
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/aptmgr
+    url: jdbc:postgresql://192.168.1.19:6541/aptmgr
     username: postgres
     password: P@ssw0rd
   thymeleaf:
@@ -38,7 +38,7 @@ spring:
       expiration-time: 3600000
   data:
     redis:
-      host: 192.168.1.92
+      host: 192.168.1.19
       port: 6380
       time-to-live: 60000
 
