@@ -19,6 +19,7 @@ import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.test.web.servlet.MockMvc;
 import java.nio.charset.StandardCharsets;
@@ -48,6 +49,9 @@ public class UserControllerTest {
 
     @MockBean
     private final JwtService jwtService;
+
+    @MockBean
+    private final LdapTemplate ldapTemplate;
 
     @Autowired
     private MockMvc mvc;

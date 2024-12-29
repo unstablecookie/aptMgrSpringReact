@@ -17,6 +17,8 @@ const LogIn = props => {
                 setError('Please enter both username and password.');
                 return;
             }
+            console.log('name:', name);
+            console.log('password:', password);
             const response = await axios.post('/auth/signin', { name, password });
             console.log('Login successful:', response.data);
             props.apptoken(response.data.token);

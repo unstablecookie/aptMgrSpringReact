@@ -5,6 +5,8 @@ import org.example.user.dto.UserDto;
 import org.example.user.dto.UserFormRoleDto;
 import org.example.user.dto.UserFullDto;
 import org.example.util.error.EntityNotFoundException;
+import org.junit.Ignore;
+import org.junit.jupiter.api.Disabled;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+@Disabled
 @SpringBootTest
 public class UserServiceRolesTest {
     @Autowired

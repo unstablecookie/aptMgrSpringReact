@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,6 +43,9 @@ public class AuthControllerTest {
 
     @MockBean
     private final AuthenticationService authenticationService;
+
+    @MockBean
+    private final LdapTemplate ldapTemplate;
 
     @Autowired
     private MockMvc mvc;

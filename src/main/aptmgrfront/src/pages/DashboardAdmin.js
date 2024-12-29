@@ -41,18 +41,7 @@ const DashboardAdmin = props => {
   const DashboardUsers = (e) => {
     return (
       <div>
-          <div onClick={onClickNewUser}>
-             <NewUserButton />
-           </div>
-           <div>
-             { showNewUser ? <NewUser token={props.apptoken} hide={setShowNewUser}/> : null }
-           </div>
-           <div onClick={onClickListUsers}>
-             <ListUsersButton />
-           </div>
-           <div>
-             { showListUsers ? <LoadUsers token={props.apptoken}/> : null }
-           </div>
+        <p>Users managed by your LDAP admins</p>
       </div>
     );
   };

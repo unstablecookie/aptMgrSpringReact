@@ -1,0 +1,1 @@
+InetOrgPerson [Dn=cn=user3,ou=users,dc=comp,dc=com; Username=user3; Password=[PROTECTED]; Enabled=true; AccountNonExpired=true; CredentialsNonExpired=true; AccountNonLocked=true; Granted Authorities=[]]

@@ -56,6 +56,20 @@ public class UserMapper {
                 .build();
     }
 
+    public static User toUser(UserAuthDto userAuthDto, Role role) {
+        return User.builder()
+                .name(userAuthDto.getName() != null ? userAuthDto.getName() : null)
+                .roles(List.of(role))
+                .build();
+    }
+
+    public static User toUser(UserAuthDto userAuthDto, List<Role> roles) {
+        return User.builder()
+                .name(userAuthDto.getName() != null ? userAuthDto.getName() : null)
+                .roles(roles)
+                .build();
+    }
+
     public static User toUser(UserAuthDto userAuthDto, PasswordEncoder passwordEncoder) {
         return User.builder()
                 .name(userAuthDto.getName())
