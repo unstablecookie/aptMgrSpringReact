@@ -35,10 +35,6 @@ public class UserMapper {
                 .build();
     }
 
-    public static void updateUser(User user, User updatedUser) {
-        if (updatedUser.getName() != null) user.setName(updatedUser.getName());
-    }
-
     public static User toUser(UserFormRoleDto userFormRoleDto, Role role, PasswordEncoder passwordEncoder) {
         return User.builder()
                 .name(userFormRoleDto.getName() != null ? userFormRoleDto.getName() : null)

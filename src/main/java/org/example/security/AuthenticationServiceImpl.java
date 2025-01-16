@@ -3,8 +3,6 @@ package org.example.security;
 import lombok.AllArgsConstructor;
 import org.example.aspect.LogAfterExecution;
 import org.example.aspect.LogBeforeExecution;
-import org.example.user.RoleRepository;
-import org.example.user.UserRepository;
 import org.example.user.dto.UserAuthDto;
 import org.example.user.dto.UserDto;
 import org.example.user.dto.UserMapper;
@@ -29,8 +27,6 @@ import static org.springframework.ldap.query.LdapQueryBuilder.query;
 @Service
 @AllArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
@@ -38,12 +34,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @LogAfterExecution
     public UserDto signup(UserAuthDto userAuthDto) {
-        Role role = roleRepository.findById(1L).orElseThrow(
-                () -> new EntityNotFoundException(String.format("Role with id=%d was not found", 1L),
-                        "The required object was not found."));
-        User user = UserMapper.toUser(userAuthDto, passwordEncoder);
-        user.setRoles(List.of(role));
-        return UserMapper.toUserDto(userRepository.save(user));
+        return new UserDto();
     }
 
     @LogBeforeExecution
