@@ -7,13 +7,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
-    List<Property> findByUserId(Long userId);
+    List<Property> findByOwnerUid(String ownerUid);
 
-    Long countByUserId(Long userId);
+    Long countByOwnerUid(String ownerUid);
 
-    Page<Property> findByUserId(Long userId, Pageable page);
+    Page<Property> findByOwnerUid(String ownerUid, Pageable page);
 
     Page<Property> findByTitleContainingIgnoreCase(String title, Pageable page);
 
-    Page<Property> findByUserIdAndTitleContainingIgnoreCase(Long userId, String title, Pageable page);
+    Page<Property> findByOwnerUidAndTitleContainingIgnoreCase(String ownerUid, String title, Pageable page);
 }

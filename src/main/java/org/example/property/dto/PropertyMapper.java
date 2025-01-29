@@ -16,7 +16,7 @@ public class PropertyMapper {
                 .id(property.getId() != null ? property.getId() : null)
                 .title(property.getTitle() != null ? property.getTitle() : null)
                 .propertyType(property.getPropertyType() != null ? property.getPropertyType().getType() : null)
-                .ownerId(property.getUser().getId() != null ? property.getUser().getId() : null)
+                .ownerUid(property.getOwnerUid() != null ? property.getOwnerUid() : null)
                 .build();
     }
 
@@ -25,7 +25,7 @@ public class PropertyMapper {
                 .id(property.getId() != null ? property.getId() : null)
                 .title(property.getTitle() != null ? property.getTitle() : null)
                 .propertyType(property.getPropertyType() != null ? property.getPropertyType().getType() : null)
-                .ownerId(property.getUser().getId() != null ? property.getUser().getId() : null)
+                .ownerUid(property.getOwnerUid() != null ? property.getOwnerUid() : null)
                 .buildIn(property.getBuildIn() != null ? property.getBuildIn() : null)
                 .floorsNumb(property.getFloorsNumb() != null ? property.getFloorsNumb() : null)
                 .sqrMeters(property.getSqrMeters() != null ? property.getSqrMeters() : null)
@@ -46,11 +46,11 @@ public class PropertyMapper {
                 .build();
     }
 
-    public static Property toPropertyWithUser(PropertySaveDto propertySaveDto, PropertyType propertyType, User user) {
+    public static Property toPropertyWithUser(PropertySaveDto propertySaveDto, PropertyType propertyType, String ownerUid) {
         return Property.builder()
                 .title(propertySaveDto.getTitle() != null ? propertySaveDto.getTitle() : null)
                 .propertyType(propertyType != null ? propertyType : null)
-                .user(user)
+                .ownerUid(ownerUid)
                 .buildIn(propertySaveDto.getBuildIn() != null ? propertySaveDto.getBuildIn() : null)
                 .floorsNumb(propertySaveDto.getFloorsNumb() != null ? propertySaveDto.getFloorsNumb() : null)
                 .sqrMeters(propertySaveDto.getSqrMeters() != null ? propertySaveDto.getSqrMeters() : null)

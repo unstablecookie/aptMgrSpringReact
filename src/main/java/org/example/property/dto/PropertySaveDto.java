@@ -13,7 +13,7 @@ public class PropertySaveDto {
     private Long id;
     private String title;
     private Long propertyTypeId;
-    private Long ownerId;
+    private String ownerUid;
     private Integer buildIn;
     private Integer floorsNumb;
     private Integer sqrMeters;

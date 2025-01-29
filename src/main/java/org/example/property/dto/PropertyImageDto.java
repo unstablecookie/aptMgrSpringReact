@@ -15,7 +15,7 @@ public class PropertyImageDto implements Serializable {
     private Long id;
     private String title;
     private String propertyType;
-    private Long ownerId;
+    private String ownerUid;
     private byte[] data;
     private Integer buildIn;
     private Integer floorsNumb;

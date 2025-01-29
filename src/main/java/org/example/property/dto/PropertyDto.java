@@ -13,5 +13,5 @@ public class PropertyDto {
     private Long id;
     private String title;
     private String propertyType;
-    private Long ownerId;
+    private String ownerUid;
 }

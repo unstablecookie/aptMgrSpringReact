@@ -27,9 +27,8 @@ public class Property {
     @JoinColumn(name = "property_type_id")
     private PropertyType propertyType;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "owner_id")
-    private User user;
+    @Column(name = "owner_uid")
+    private String ownerUid;
 
     @Column(name = "build_in")
     private Integer buildIn;

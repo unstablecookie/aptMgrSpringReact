@@ -62,7 +62,7 @@ public class PropertyServiceImpl implements PropertyService {
         User user = tokenExtractor.getUserFromToken(token);
         PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
         List<PropertyImageDto> properties =
-                propertyRepository.findByUserIdAndTitleContainingIgnoreCase(user.getId(), title.toLowerCase(), page).stream()
+                propertyRepository.findByOwnerUidAndTitleContainingIgnoreCase(user.getName(), title.toLowerCase(), page).stream()
                 .map(x -> PropertyMapper.toPropertyImageDto(x))
                 .collect(Collectors.toList());
         updatePropertyDtoWithImages(properties);
@@ -91,7 +91,7 @@ public class PropertyServiceImpl implements PropertyService {
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
-        if (!user.getId().equals(property.getUser().getId())) {
+        if (!user.getName().equals(property.getOwnerUid())) {
             throw new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                     "The required object was not found.");
         }
@@ -119,7 +119,7 @@ public class PropertyServiceImpl implements PropertyService {
         PropertyType propertyType = propertyTypeRepository.findById(propertySaveDto.getPropertyTypeId()).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Type with id=%d was not found", propertySaveDto.getPropertyTypeId()),
                         "The required object was not found."));
-        Property property = PropertyMapper.toPropertyWithUser(propertySaveDto, propertyType, user);
+        Property property = PropertyMapper.toPropertyWithUser(propertySaveDto, propertyType, user.getName());
         return PropertyMapper.toPropertyDto(propertyRepository.save(property));
     }
 
@@ -132,7 +132,7 @@ public class PropertyServiceImpl implements PropertyService {
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
-        if (!property.getUser().getId().equals(user.getId())) {
+        if (!property.getOwnerUid().equals(user.getName())) {
             List<Role> roles = user.getRoles();
             roles.stream().filter(x -> x.getName().equals(RoleEnum.ADMIN)).findAny().orElseThrow(
                     () -> new PermissionViolationException(String.format("User with id=%d is not an owner or ADMIN", user.getId()),
@@ -153,7 +153,7 @@ public class PropertyServiceImpl implements PropertyService {
         Property property = propertyRepository.findById(propertyId).orElseThrow(
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
-        if (!property.getUser().getId().equals(user.getId())) {
+        if (!property.getOwnerUid().equals(user.getName())) {
             List<Role> roles = user.getRoles();
             roles.stream().filter(x -> x.getName().equals(RoleEnum.ADMIN)).findAny().orElseThrow(
                     () -> new PermissionViolationException(String.format("User with id=%d is not an owner or ADMIN", user.getId()),
@@ -179,7 +179,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<PropertyDto> getOwnerProperties(String token) {
         User user = tokenExtractor.getUserFromToken(token);
-        return propertyRepository.findByUserId(user.getId()).stream()
+        return propertyRepository.findByOwnerUid(user.getName()).stream()
                 .map(x -> PropertyMapper.toPropertyDto(x))
                 .collect(Collectors.toList());
     }
@@ -191,7 +191,7 @@ public class PropertyServiceImpl implements PropertyService {
     public List<PropertyImageDto> getOwnerPropertiesWithImages(String token, int from, int size) {
         PageRequest page = PageRequest.of(from > 0 ? from / size : 0, size);
         User user = tokenExtractor.getUserFromToken(token);
-        List<PropertyImageDto> properties = propertyRepository.findByUserId(user.getId(), page).stream()
+        List<PropertyImageDto> properties = propertyRepository.findByOwnerUid(user.getName(), page).stream()
                 .map(x -> PropertyMapper.toPropertyImageDto(x))
                 .collect(Collectors.toList());
         updatePropertyDtoWithImages(properties);
@@ -238,7 +238,7 @@ public class PropertyServiceImpl implements PropertyService {
                 () -> new EntityNotFoundException(String.format("Property with id=%d was not found", propertyId),
                         "The required object was not found."));
         User user = tokenExtractor.getUserFromToken(token);
-        if (!user.getId().equals(property.getUser().getId())) {
+        if (!user.getName().equals(property.getOwnerUid())) {
             throw new PermissionViolationException(String.format("User with id=%d is not an owner", user.getId()),
                     "Object permissions were violated!.");
         }
@@ -258,7 +258,7 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public Long countOwnerProperty(String token) {
         User user = tokenExtractor.getUserFromToken(token);
-        return propertyRepository.countByUserId(user.getId());
+        return propertyRepository.countByOwnerUid(user.getName());
     }
 
     private void updatePropertyDtoWithImages(List<PropertyImageDto> properties) {
