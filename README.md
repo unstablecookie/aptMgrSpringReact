@@ -26,8 +26,8 @@ This is a web application to manage property.
 Availdable in **addldap** branch. Open ldap integration with bind authentication.
 The docker config comes with pre-configured open ldap server :
 3 users , 2 role groups.
-user1:password1 ,- no permissions across application
-user2:password2 ,- permissions to add own property
+user1:password1 ,- no permissions across application.
+user2:password2 ,- permissions to add own property.
 user3:password3 ,- permissions to add property and view all properties.
 
 
