@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/common.css';
 import '../styles/darkribbon.css';
-import NewUser from '../components/user/NewUser';
 import NewPropertyByOwner from '../components/property/NewPropertyByOwner';
-import NewUserButton from '../components/menu/NewUserButton';
 import NewPropertyButton from '../components/menu/NewPropertyButton';
-import ListUsersButton from '../components/menu/ListUsersButton';
-import LoadUsers from '../components/user/LoadUsers';
 import LoadProperties from '../components/property/LoadProperties';
 import ListPropertiesButton from '../components/menu/ListPropertiesButton';
 import TopRibbon from '../components/menu/TopRibbon';

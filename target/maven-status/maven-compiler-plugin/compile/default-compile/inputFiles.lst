@@ -38,7 +38,6 @@ D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\security\config\Sec
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\security\JwtAuthenticationFilter.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\security\JwtService.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\security\TokenExtractor.java
-D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\AdminSeeder.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\dto\RoleDto.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\dto\RoleMapper.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\dto\UserAuthDto.java
@@ -49,11 +48,6 @@ D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\dto\UserMapper
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\model\Role.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\model\RoleEnum.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\model\User.java
-D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\RoleRepository.java
-D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\UserController.java
-D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\UserRepository.java
-D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\UserService.java
-D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\user\UserServiceImpl.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\util\auth\LoginResponse.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\util\CustomRestExceptionHandler.java
 D:\dev\code\java\aptMgrSpringReact\src\main\java\org\example\util\error\EntityNotFoundException.java

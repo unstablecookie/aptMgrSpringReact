@@ -13,8 +13,6 @@ org\example\property\dto\PropertyPaidUpdateDto.class
 org\example\property\PropertyTypeRepository.class
 org\example\property\PropertyServiceImpl.class
 org\example\property\dto\PropertyTypeDto$PropertyTypeDtoBuilder.class
-org\example\user\UserController.class
-org\example\user\UserService.class
 org\example\property\dto\PropertyPaidUpdateDto$PropertyPaidUpdateDtoBuilder.class
 org\example\user\dto\UserFormRoleDto.class
 org\example\security\AuthenticationServiceImpl.class
@@ -23,7 +21,6 @@ org\example\user\dto\UserFormRoleDto$UserFormRoleDtoBuilder.class
 org\example\property\dto\PropertyMapper.class
 org\example\property\dto\PropertySaveDto$PropertySaveDtoBuilder.class
 org\example\property\PropertyRepository.class
-org\example\user\UserRepository.class
 org\example\property\TypeSeeder.class
 org\example\property\model\Property$PropertyBuilder.class
 org\example\property\model\PropertyType$PropertyTypeBuilder.class
@@ -42,7 +39,6 @@ org\example\user\dto\RoleMapper.class
 org\example\security\config\ApplicationConfiguration.class
 org\example\ApplicationEntry.class
 org\example\user\dto\UserDto$UserDtoBuilder.class
-org\example\user\UserServiceImpl.class
 org\example\aspect\LogBeforeExecution.class
 org\example\property\model\PropertyType.class
 org\example\aspect\LogAfterExecution.class
@@ -60,7 +56,6 @@ org\example\aspect\LogBeforeExecutionNoToken.class
 org\example\property\dto\PropertyImageDto$PropertyImageDtoBuilder.class
 org\example\property\dto\PropertyImageDto.class
 org\example\property\dto\PropertyTypeMapper.class
-org\example\user\RoleRepository.class
 org\example\user\model\User.class
 org\example\security\JwtService.class
 org\example\user\model\Role$RoleBuilder.class
@@ -72,6 +67,5 @@ org\example\controller\AuthController.class
 org\example\property\PropertyImageRepository.class
 org\example\aspect\LogAfterReturningSingleObject.class
 org\example\property\PropertyRepositoryPageAndSort.class
-org\example\user\AdminSeeder.class
 org\example\property\PropertyService.class
 org\example\util\error\PermissionViolationException.class

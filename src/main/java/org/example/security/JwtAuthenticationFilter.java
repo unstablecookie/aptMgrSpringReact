@@ -32,7 +32,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final JwtService jwtService;
     private final LdapTemplate ldapTemplate;
-//    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -41,29 +40,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
-            //logger.info("LOGGED .(authHeader == null || !authHeader.startsWith(Bearer )) ");
             return;
         }
-        //logger.info("LOGGED .authHeader : " + authHeader);
         try {
             final String jwt = authHeader.substring(7);
             final String userName = jwtService.extractUsername(jwt);
             logger.info("LOGGED .userName : " + userName);
-            //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//            logger.info("LOGGED .authentication : " + authentication);
-//            if (userName != null && authentication == null) {
-//                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
-//                if (jwtService.isTokenValid(jwt, userDetails)) {
-//                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-//                            userDetails,
-//                            null,
-//                            userDetails.getAuthorities()
-//                    );
-//
-//                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-//                    SecurityContextHolder.getContext().setAuthentication(authToken);
-//                }
-//            }
             List<Role> roles = new ArrayList<>();
             try {
                 List<String> allGroups = ldapTemplate.search(query()
@@ -73,11 +55,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 allGroups.stream().map(x -> {
                     String[] arr = x.split(",");
                     return arr[0].substring(3).toUpperCase();
-                }).forEach( x -> roles.add(Role.builder().name(RoleEnum.valueOf(x)).build()));
+                }).forEach(x -> roles.add(Role.builder().name(RoleEnum.valueOf(x)).build()));
             } catch (Exception e) {
                 logger.error("guser groups query error : " + e.getMessage());
             }
-            if (userName != null ) {
+            if (userName != null) {
                 User user = User.builder()
                         .name(userName)
                         .roles(roles).build();

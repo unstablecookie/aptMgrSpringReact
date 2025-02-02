@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: 'aptmgr.0.5'
+    image: 'aptmgr.0.5ldap'
     build:
       context: .
     container_name: aptmgr
@@ -36,3 +36,18 @@ services:
     ports:
       - "6380:6379"
     command: redis-server --bind 0.0.0.0
+  
+  ldapsrv:
+    container_name: oldap
+    build:
+      context: ./
+      dockerfile: ./ldapconf/Dockerfile
+    ports:
+      - "389:389"
+      - "636:636"
+    environment:
+      LDAP_ORGANISATION: "Comp"
+      LDAP_DOMAIN: "comp.com" 
+      LDAP_ADMIN_PASSWORD: "password"
+    domainname: "comp.com"
+    hostname: "oldap-server"

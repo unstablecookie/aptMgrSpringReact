@@ -11,10 +11,27 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.ldap.LdapBindAuthenticationManagerFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
+import org.springframework.beans.factory.annotation.Value;
 
 @Configuration
 @AllArgsConstructor
 public class ApplicationConfiguration {
+
+    @Value("${ldap.server.ip}")
+    private String ldapServerIp;
+
+    @Value("${ldap.server.port}")
+    private String ldapServerPort;
+
+    @Value("${ldap.domain}")
+    private String ldapDomain;
+
+    @Value("${ldap.user.dn}")
+    private String ldapUserDn;
+
+    @Value("${ldap.user.password}")
+    private String ldapUserPassword;
+
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -22,9 +39,9 @@ public class ApplicationConfiguration {
 
     @Bean
     BaseLdapPathContextSource contextSource() {
-        LdapContextSource contextSource = new DefaultSpringSecurityContextSource("ldap://192.168.1.19:389/dc=comp,dc=com");
-        contextSource.setUserDn("cn=admin,dc=comp,dc=com");
-        contextSource.setPassword("password");
+        LdapContextSource contextSource = new DefaultSpringSecurityContextSource("ldap://" + ldapServerIp + ":" + ldapServerPort + "/" + ldapDomain);
+        contextSource.setUserDn("cn=" + ldapUserDn + "," + ldapDomain);
+        contextSource.setPassword(ldapUserPassword);
         return contextSource;
     }
 

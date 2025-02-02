@@ -1,0 +1,56 @@
+#add ou users
+dn: ou=users,dc=comp,dc=com
+objectClass: organizationalUnit
+ou: users
+
+#add ou groups
+dn: ou=groups,dc=comp,dc=com
+objectClass: organizationalUnit
+ou: groups
+
+# Add user1
+dn: uid=user1,ou=users,dc=comp,dc=com
+objectClass: person
+objectClass: inetOrgPerson
+description: John Smith from Accounting.  John is the project
+  manager of the building project, so contact him with any qu
+ estions.
+cn: user1
+sn: Smith
+uid: user1
+userPassword: password1
+
+# Add user2
+dn: uid=user2,ou=users,dc=comp,dc=com
+objectClass: person
+objectClass: inetOrgPerson
+description: Sally Brown from engineering.  Sally is responsibl
+ e for designing the blue prints and testing the structural int
+ egrity of the design.
+cn: user2
+sn: Brown
+uid: user2
+userPassword: password2
+memberOf: cn=user,ou=groups,dc=comp,dc=com
+
+# Add user3
+dn: uid=user3,ou=users,dc=comp,dc=com
+objectClass: person
+objectClass: inetOrgPerson
+cn: user3
+sn: Key
+uid: user3
+userPassword: password3
+memberOf: cn=admin,ou=groups,dc=comp,dc=com
+
+#add group
+dn: cn=user,ou=groups,dc=comp,dc=com
+objectClass: groupOfNames
+cn: user
+member: uid=user2,ou=users,dc=comp,dc=com
+
+#add group
+dn: cn=admin,ou=groups,dc=comp,dc=com
+objectClass: groupOfNames
+cn: admin
+member: uid=user3,ou=users,dc=comp,dc=com

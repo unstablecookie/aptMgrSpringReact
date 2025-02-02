@@ -2,7 +2,6 @@ package org.example.property.dto;
 
 import org.example.property.model.Property;
 import org.example.property.model.PropertyType;
-import org.example.user.model.User;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

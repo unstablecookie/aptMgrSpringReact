@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class TypeSeeder implements ApplicationListener<ContextRefreshedEvent> {
@@ -17,7 +19,10 @@ public class TypeSeeder implements ApplicationListener<ContextRefreshedEvent> {
     }
 
     public void seedTypes() {
-        propertyTypeRepository.save(PropertyType.builder().type("HOUSE").build());
-        propertyTypeRepository.save(PropertyType.builder().type("APARTMENT").build());
+        List<PropertyType> types = propertyTypeRepository.findAll();
+        if (types.size() < 2) {
+            propertyTypeRepository.save(PropertyType.builder().type("HOUSE").build());
+            propertyTypeRepository.save(PropertyType.builder().type("APARTMENT").build());
+        }
     }
 }

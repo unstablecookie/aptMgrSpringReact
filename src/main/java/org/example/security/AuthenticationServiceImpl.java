@@ -53,7 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             allGroups.stream().map(x -> {
                 String[] arr = x.split(",");
                 return arr[0].substring(3).toUpperCase();
-            }).forEach( x -> roles.add(Role.builder().name(RoleEnum.valueOf(x)).build()));
+            }).forEach(x -> roles.add(Role.builder().name(RoleEnum.valueOf(x)).build()));
         } catch (Exception e) {
             throw new EntityNotFoundException("can't find user groups", "The required object was not found.");
         }
